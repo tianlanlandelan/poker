@@ -1,0 +1,4 @@
+class TimerContainer {
+	public constructor() {
+	}
+}

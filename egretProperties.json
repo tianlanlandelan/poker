@@ -1,0 +1,38 @@
+{
+	"native": {
+		"path_ignore": [],
+		"android_path": "C:/Users/Administrator/puker"
+	},
+	"publish": {
+		"web": 0,
+		"native": 1,
+		"path": "bin-release"
+	},
+	"egret_version": "5.0.4",
+	"template": {},
+	"modules": [
+		{
+			"name": "egret"
+		},
+		{
+			"name": "socket"
+		},
+		{
+			"name": "game"
+		},
+		{
+			"name": "res"
+		},
+		{
+			"name": "tween"
+		},
+		{
+			"name": "promise",
+			"path": "./promise"
+		},
+		{
+			"name": "pomelo",
+			"path": "./pomelo"
+		}
+	]
+}

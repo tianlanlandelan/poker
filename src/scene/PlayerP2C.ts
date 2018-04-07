@@ -27,7 +27,10 @@ class PlayerP2C extends egret.DisplayObjectContainer {
 
     private bottom:BottomContainer;
     
-    private isDevelop:boolean = false;
+    /**
+     * 是否是开发模式，开发模式下将显示明牌
+     */
+    private isDevelop:boolean = true;
 
     private poc1Index:number = Math.floor(Math.random() * 10) + 1;
     private poc2Index:number = Math.floor(Math.random() * 10) + 1;

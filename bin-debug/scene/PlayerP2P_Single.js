@@ -64,6 +64,18 @@ var PlayerP2P_Single = (function (_super) {
             return;
         }
         var res = JSON.parse(response);
+        if (res.code == RoomManager.Response_RoomInfo) {
+        }
+        else if (res.code == RoomManager.Response_Reday) {
+        }
+        else if (res.code == RoomManager.Response_DealPoker) {
+        }
+        else if (res.code == RoomManager.Response_ToCallTheLandlord) {
+        }
+        else if (res.code == RoomManager.Response_LandlordAndLastCard) {
+        }
+        else if (res.code == RoomManager.Response_Discard) {
+        }
         // console.log("onReceiveData:",res.code,res.data);
     };
     PlayerP2P_Single.prototype.onConnected = function () {
@@ -74,76 +86,6 @@ var PlayerP2P_Single = (function (_super) {
     };
     PlayerP2P_Single.prototype.onIOError = function () {
         console.log('webSocket', 'IO Error');
-    };
-    /**
-     * 接收
-     */
-    PlayerP2P_Single.prototype.receive = function (code, data) {
-        console.log("收到服务器数据--code:", code, "data", data);
-        if (code === 11002) {
-            console.log("Server发牌");
-            var myPukers = data.pukers;
-            this.pukers1 = myPukers.sort(PukerUtils.sortDESC);
-            this.puker = new PukerContainer(this, this.pukers1);
-            this.puker.name = "puker";
-            this.addChild(this.puker);
-            Socket.send({
-                key: "room",
-                code: 11001
-            });
-        }
-        else if (code === 11003) {
-            console.log("Server已随机选择地主");
-            if (data.self) {
-                this.showButton(0);
-            }
-        }
-        else if (code === 11004) {
-            console.log("争地主");
-            if (data.self) {
-                this.showButton(1);
-            }
-        }
-        else if (code === 11005) {
-            console.log("地主已确定");
-            if (data.self) {
-                //TODO data.seat 地主的座号
-                this.pukers1 = this.pukers1.concat(data.pukers).sort(PukerUtils.sortDESC);
-                if (this.getChildByName("puker") != null) {
-                    this.removeChild(this.getChildByName("puker"));
-                }
-                this.puker = new PukerContainer(this, this.pukers1);
-                this.puker.name = "puker";
-                this.addChild(this.puker);
-                this.showButton(2);
-            }
-            else {
-                this.loadOtherPlayerPortrait(data.seat, null, true);
-            }
-            //显示底牌
-            this.pukerBottom = new PukerBottomContainer(data.pukers);
-            this.pukerBottom.name = "pukerBottom";
-            this.addChild(this.pukerBottom);
-        }
-        else if (code === 11006) {
-            console.log("有玩家进入房间");
-            this.loadOtherPlayerPortrait(data.seat, data.name, false);
-        }
-        else if (code === 11007) {
-            console.log("有玩家准备/取消准备");
-        }
-        else if (code === 11008) {
-            console.log("该谁出牌");
-            if (data.self) {
-                this.showButton(2);
-            }
-        }
-        else if (code === 11009) {
-            console.log("其他玩家出牌");
-        }
-        else if (code === 11010) {
-            console.log("游戏结束");
-        }
     };
     /**
      * 加载其他玩家头像

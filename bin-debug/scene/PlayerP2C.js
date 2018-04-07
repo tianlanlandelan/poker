@@ -16,7 +16,10 @@ var PlayerP2C = (function (_super) {
      */
     function PlayerP2C(user) {
         var _this = _super.call(this) || this;
-        _this.isDevelop = false;
+        /**
+         * 是否是开发模式，开发模式下将显示明牌
+         */
+        _this.isDevelop = true;
         _this.poc1Index = Math.floor(Math.random() * 10) + 1;
         _this.poc2Index = Math.floor(Math.random() * 10) + 1;
         _this.poc3Index = Math.floor(Math.random() * 10) + 1;

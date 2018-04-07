@@ -192,28 +192,32 @@ class PukerSeekUtils {
 		let count = 0;
 		let puker = null;
 		/*
-		1.从大到小遍历手中的牌
-		2.如果当前的牌比要压的牌大，且不大于A(小王、大王和2不能组成顺子)，则将当前牌保存，并判断下一张牌是否比当前牌大（进入小循环遍历）
+		1.从小到大遍历手中的牌（大循环）
+		2.如果当前的牌比要压的牌的最小的那张大，且不大于A(小王、大王和2不能组成顺子)，则将当前牌保存，并判断下一张牌是否比当前牌大（小循环）
 		3.当下一张牌与当前牌相等，则继续比较下一张
-		4.当下一张牌比当前牌排序值大1（连续），则将下一张牌保存，当保存的牌数量等于要压的牌数量时，表示找到了要出的牌，返回保存的牌
-		5.当下一张牌比当前牌排序值大的超过1（不连续），则清空保存的牌，退出小循环，继续大循坏
+		4.当下一张牌比当前牌大1（连续），则将下一张牌保存，当保存的牌数量等于要压的牌数量时，表示找到了要出的牌，返回保存的牌
+		5.当下一张牌比当前牌大的超过1（不连续），则清空保存的牌，退出小循环，继续大循坏
 		*/
-		for(let j = 0 ; j < aHandPukerString.length ;j ++){
-			if(PukerTypeUtils.orderString.indexOf(aHandPukerString[j]) < typeSort && PukerTypeUtils.orderString.indexOf(aHandPukerString[j]) >= 3){
+		for(let j = aHandPukerString.length - 1 ; j >= 0 ;j --){
+			if(PukerTypeUtils.orderString.indexOf(aHandPukerString[j]) < typeSort + length){
 				puker = aHandPukerString[j];
 				result.push(aHandPukerString[j]);
-				for(let k = j +1 ; k < aHandPukerString.length - 1 ; k++){
-					
-					//如果剩余的牌还没有要压的牌多，直接返回空
-					if(aHandPukerString.length - j < length){
-						return [];
-					}
+				for(let k = j - 1 ; k >= 0 ; k--){
 					let indexK = PukerTypeUtils.orderString.indexOf(aHandPukerString[k]);
 					let indexPuker = PukerTypeUtils.orderString.indexOf(puker);
+					//如果当前的牌比A大，返回空(小王、大王和2不能组成顺子)
+					if(indexK < 3){
+						return [];
+					}
+					//如果剩余的牌还没有要压的牌多，直接返回空
+					if( j < length){
+						return [];
+					}
+					
 					if(indexK == indexPuker){
 						continue;
 					}
-					if(indexK == indexPuker + 1){
+					if(indexK == indexPuker - 1){
 						puker = aHandPukerString[k];
 						result.push(aHandPukerString[k]);
 						console.log("seekStraight",result);
@@ -221,10 +225,11 @@ class PukerSeekUtils {
 							return result;
 						}
 					}
-					if(indexK > indexPuker + 1){
+					if(indexK < indexPuker - 1){
 						result = new Array<string>();
 						break;
 					}
+
 				}
 				result = new Array<string>();
 			}

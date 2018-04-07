@@ -79,3 +79,4 @@ var PukerVerticalContainer = (function (_super) {
     return PukerVerticalContainer;
 }(egret.DisplayObjectContainer));
 __reflect(PukerVerticalContainer.prototype, "PukerVerticalContainer");
+//# sourceMappingURL=PukerVerticalContainer.js.map

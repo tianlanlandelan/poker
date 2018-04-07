@@ -4,7 +4,7 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var Socket = (function () {
     function Socket() {
     }
-    Socket.init = function (ip, port) {
+    Socket.init = function (url, userName) {
         this.webSocket = new egret.WebSocket();
         //添加收到数据侦听，收到数据会调用此方法
         this.webSocket.addEventListener(egret.ProgressEvent.SOCKET_DATA, this.onReceiveData, this);
@@ -14,7 +14,8 @@ var Socket = (function () {
         this.webSocket.addEventListener(egret.Event.CLOSE, this.onConnectClose, this);
         //添加异常侦听，出现异常会调用此方法
         this.webSocket.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onIOError, this);
-        this.webSocket.connect(ip, port);
+        // this.webSocket.connect(ip,port);
+        this.webSocket.connectByUrl(url + "/" + userName);
     };
     Socket.register = function (socketReceive) {
         if (this.socketReceiveList.some(function (item) { return (socketReceive.module == item.module); })) {
@@ -36,6 +37,7 @@ var Socket = (function () {
     };
     Socket.onReceiveData = function (e) {
         var response = this.webSocket.readUTF();
+        console.log("onReceiveData:", response);
         if (response.length == 0) {
             return;
         }
@@ -60,3 +62,4 @@ var Socket = (function () {
 }());
 Socket.socketReceiveList = [];
 __reflect(Socket.prototype, "Socket");
+//# sourceMappingURL=Socket.js.map

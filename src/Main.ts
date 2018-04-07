@@ -27,7 +27,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Main extends egret.DisplayObjectContainer implements  SocketReceive{
+class Main extends egret.DisplayObjectContainer{
 
     /**
      * 加载进度界面
@@ -127,43 +127,16 @@ class Main extends egret.DisplayObjectContainer implements  SocketReceive{
             this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
         }
     }
-   public isConnectioned:boolean = false;
-   private user:any  = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
-   module:string = "hall";
-   public receive(code:number,data:any){
-        console.log("收到服务器数据--code:",code,"data",data);
-        Socket.UUID = data;
-        if(code === 10000){
-             console.log("已连接到服务器:data",data );
-             Socket.send({
-                 module:"gamer",
-                 code:10000,
-                 data:{
-                    name: this.user.name
-                 }
-                 
-             });
-             console.log("已发送用户信息，user:",this.user);
-             this.isConnectioned = true;
-        }else if(code === 10001){
-            console.log("已分配房间");
-            this.intoRoom(data.seat,data.gamers);
-        }
-	}
     /**
-     * 是否是单机模式
+     * 加载用户资料，在这里随机产生
      */
-    private isOffLineGame:boolean = true;
+   private user:any  = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
+
     /**
      * 创建游戏场景
      * Create a game scene
      */
     private createGameScene() {
-        if(!this.isOffLineGame){
-            Socket.register(this);
-            Socket.init("192.168.31.108",8080);
-            console.log("正在请求服务器... ...");
-        }
         /** 舞台大小 */
         let layout = RES.getRes("layout_json").layout;
         this.stage.orientation = egret.OrientationMode.LANDSCAPE;
@@ -171,28 +144,12 @@ class Main extends egret.DisplayObjectContainer implements  SocketReceive{
         console.log("舞台大小：",this.stage.stageWidth,"*",this.stage.stageHeight);
 
         /** 起始界面 */
-        let startScene:StartScene = new StartScene(this.user,this.isOffLineGame);
+        let startScene:StartScene = new StartScene(this.user);
         startScene.name = "startScene";
         this.addChild(startScene);
-
-        
     }
 
     
-    /**
-     * 
-     * 进入房间
-     * 移除游戏起始界面
-     * 加载游戏界面
-     * seat 座位号
-     */
-    private intoRoom(seat:number,gamers:Array<any>){
-        if(this.getChildByName("startScene") != null){
-            this.removeChild(this.getChildByName("startScene"));
-        }
-        let player:PlayerP2P_Single = new PlayerP2P_Single(this.user.name,seat,gamers);
-        this.addChild(player);
-    }
     private createBitmapByName(name: string) {
         let result = new egret.Bitmap();
         let texture: egret.Texture = RES.getRes(name);

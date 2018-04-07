@@ -5,7 +5,7 @@ class Socket{
     private static webSocket:egret.WebSocket;
     public  static UUID:string ;
 
-    public static init(ip:string,port:number){
+    public static init(url:string,userName:string){
         this.webSocket = new egret.WebSocket();
         //添加收到数据侦听，收到数据会调用此方法
         this.webSocket.addEventListener(egret.ProgressEvent.SOCKET_DATA,this.onReceiveData,this);
@@ -15,7 +15,8 @@ class Socket{
         this.webSocket.addEventListener(egret.Event.CLOSE,this.onConnectClose,this);
         //添加异常侦听，出现异常会调用此方法
         this.webSocket.addEventListener(egret.IOErrorEvent.IO_ERROR,this.onIOError,this);
-        this.webSocket.connect(ip,port);
+        // this.webSocket.connect(ip,port);
+        this.webSocket.connectByUrl(url + "/" + userName);
     }
 
     public static register(socketReceive:SocketReceive):void{
@@ -41,6 +42,7 @@ class Socket{
 
     private static onReceiveData(e:egret.Event):void{
         let response:string = this.webSocket.readUTF();
+        console.log("onReceiveData:",response);
         if(response.length == 0){
             return;
         }

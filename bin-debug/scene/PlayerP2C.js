@@ -595,3 +595,4 @@ var PlayerP2C = (function (_super) {
     return PlayerP2C;
 }(egret.DisplayObjectContainer));
 __reflect(PlayerP2C.prototype, "PlayerP2C");
+//# sourceMappingURL=PlayerP2C.js.map

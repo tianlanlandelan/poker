@@ -36,3 +36,4 @@ var DefaultPortrait = (function (_super) {
     return DefaultPortrait;
 }(egret.Bitmap));
 __reflect(DefaultPortrait.prototype, "DefaultPortrait");
+//# sourceMappingURL=DefaultPortrait.js.map

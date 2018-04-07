@@ -63,3 +63,4 @@ var T_touchMove = (function (_super) {
     return T_touchMove;
 }(egret.DisplayObjectContainer));
 __reflect(T_touchMove.prototype, "T_touchMove");
+//# sourceMappingURL=T_touchMove.js.map

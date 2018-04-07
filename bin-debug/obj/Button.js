@@ -33,3 +33,4 @@ var Button = (function (_super) {
     return Button;
 }(egret.Bitmap));
 __reflect(Button.prototype, "Button");
+//# sourceMappingURL=Button.js.map

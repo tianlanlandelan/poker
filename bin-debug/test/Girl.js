@@ -18,3 +18,4 @@ var Girl = (function (_super) {
     return Girl;
 }(egret.Sprite));
 __reflect(Girl.prototype, "Girl");
+//# sourceMappingURL=Girl.js.map

@@ -20,3 +20,4 @@ var HallMenus = (function (_super) {
     return HallMenus;
 }(egret.Bitmap));
 __reflect(HallMenus.prototype, "HallMenus");
+//# sourceMappingURL=HallMenus.js.map

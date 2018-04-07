@@ -1,12 +1,10 @@
 class StartScene extends egret.DisplayObjectContainer{
-	private isOffLineGame:boolean = false;
     private user:any;
     private sound:egret.Sound = RES.getRes("bg_guzheng_mp3");
     private soundChannel:egret.SoundChannel;
-	public constructor(user:any,isOffLineGame:boolean) {
+	public constructor(user:any) {
 		super();
         this.user = user;
-		this.isOffLineGame = isOffLineGame;
         this.show();
 	}
 	private show(){
@@ -14,10 +12,12 @@ class StartScene extends egret.DisplayObjectContainer{
         this.soundChannel = this.sound.play();
         this.soundChannel.volume = 0.3;
 
+        //加载游戏背景图
         let bg:egret.Bitmap = new egret.Bitmap(RES.getRes("startBgImg_png"));
         bg.name = "bgImg";
         this.addChild(bg);
 
+        //加载开始按钮
         let button:egret.Bitmap = new egret.Bitmap(RES.getRes("button_begin_png"));
         button.touchEnabled = true;
 		button.addEventListener(egret.TouchEvent.TOUCH_TAP,this.startGame,this);
@@ -28,23 +28,13 @@ class StartScene extends egret.DisplayObjectContainer{
 
 	}
 	/**
-     * 点击开始游戏按钮
+     * 点击开始游戏按钮,移除开始界面，进入游戏大厅
      */
     private startGame(evt:egret.TouchEvent):void{
         this.soundChannel.stop();
         let gameHall:GameHall = new GameHall(this.user);
         gameHall.name = "gameHall";
         this.parent.addChild(gameHall);
-        // if(this.isOffLineGame){//加载单机游戏场景
-        //     let playerP2c:PlayerP2C = new PlayerP2C(this.user);
-        //     this.parent.addChild(playerP2c);
-        // }else{//加载联机游戏场景
-        //     Socket.send({//进入房间
-        //          module:"room",
-        //          code:10001 
-        //      });
-        //     console.log("已向Server请求开始游戏，等待Server分配房间...");
-        // }
-         this.parent.removeChild(this);
+        this.parent.removeChild(this);
     }
 }

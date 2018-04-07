@@ -278,3 +278,4 @@ PukerTypeUtils.typePlane2Pairs = "typePlane2Pairs";
 PukerTypeUtils.typeFour2Single = "typeFour2Single";
 PukerTypeUtils.typeFour2Pairs = "typeFour2Pairs";
 __reflect(PukerTypeUtils.prototype, "PukerTypeUtils");
+//# sourceMappingURL=PukerTypeUtils.js.map

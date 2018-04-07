@@ -26,3 +26,4 @@ var Boy = (function (_super) {
     return Boy;
 }(egret.Sprite));
 __reflect(Boy.prototype, "Boy");
+//# sourceMappingURL=Boy.js.map

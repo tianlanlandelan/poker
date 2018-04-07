@@ -25,3 +25,4 @@ var TextTip = (function (_super) {
     return TextTip;
 }(egret.TextField));
 __reflect(TextTip.prototype, "TextTip");
+//# sourceMappingURL=TextTip.js.map

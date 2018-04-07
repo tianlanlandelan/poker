@@ -24,3 +24,4 @@ var Layout = (function (_super) {
     return Layout;
 }(egret.Bitmap));
 __reflect(Layout.prototype, "Layout");
+//# sourceMappingURL=Layout.js.map

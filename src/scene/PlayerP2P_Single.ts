@@ -1,4 +1,4 @@
-class PlayerP2P_Single extends egret.DisplayObjectContainer  implements  SocketReceive{
+class PlayerP2P_Single extends egret.DisplayObjectContainer{
 
     
 	private textfield: egret.TextField;
@@ -19,8 +19,9 @@ class PlayerP2P_Single extends egret.DisplayObjectContainer  implements  SocketR
     private pukerSelectArray:Array<number> = new Array<number>();
 	private index:number = 0;
 	private layout;
+    
 
-    private userName;
+    private user;
     private pukerUtil:PukerUtils = new PukerUtils();
     //初始化一副牌（洗牌）
     private pukers:Array<number> =
@@ -43,107 +44,75 @@ class PlayerP2P_Single extends egret.DisplayObjectContainer  implements  SocketR
 
     private leftName:string;
     private rightName:string;
+    
+    private webSocket:egret.WebSocket;
+    public  UUID:string ;
 
 	/**
-	 * 单房间联机游戏场景
-     * seat 座位号
-     * gamers 房间里的其他人 
+	 * 联机游戏场景
+     * user  玩家
 	 */
-	public  constructor(userName:string,seat:number,gamers:Array<any>) {
+	public  constructor(user:string) {
 		super();
-        this.userName = userName;
+        this.user = user;
 		this.layout = RES.getRes("layout_json").layout;
-        this.mySeat = seat;
 		let sky:Layout = new Layout(this.layout.stageWidth,this.layout.stageHeight);
         this.addChild(sky);
         this.show();
-        console.log("进入游戏房间，座位号:",this.mySeat,"其他人:",gamers);
-        //TODO  加载房间里已经有的人的头像和名字
-        if(gamers != null && gamers.length > 0 ){
-            for(let i = 0;i < gamers.length ; i ++){
-                this.loadOtherPlayerPortrait(gamers[i].seat,gamers[i].name,false);
-            }
-        }
-        // for(let gamer:any in gamers){
-        //     this.loadOtherPlayerPortrait(gamer.seat,gamer.name,false);
-        // }
-       
+        console.log("进入游戏房间");
+        this.init("ws://127.0.0.1:8080/pokerWebSocket",this.user.name);
+        
 	}
+    private init(url:string,userName:string):void{
+       this.webSocket = new egret.WebSocket();
+        //添加收到数据侦听，收到数据会调用此方法
+        this.webSocket.addEventListener(egret.ProgressEvent.SOCKET_DATA,this.onReceiveData,this);
+        //添加链接打开侦听，连接成功会调用此方法
+        this.webSocket.addEventListener(egret.Event.CONNECT,this.onConnected,this);
+        //添加链接关闭侦听，手动关闭或者服务器关闭连接会调用此方法
+        this.webSocket.addEventListener(egret.Event.CLOSE,this.onConnectClose,this);
+        //添加异常侦听，出现异常会调用此方法
+        this.webSocket.addEventListener(egret.IOErrorEvent.IO_ERROR,this.onIOError,this);
+        // this.webSocket.connect(ip,port);
+        this.webSocket.connectByUrl(url + "/" + userName); 
+    }
+    public  send(data:any):void{
+        this.webSocket.writeUTF(this.UUID + JSON.stringify(data));
+    }
+    private  onReceiveData(e:egret.Event):void{
+        let response:string = this.webSocket.readUTF();
+        console.log("onReceiveData:",response);
+        if(response.length == 0){
+            return;
+        }
+        let res:any = JSON.parse(response);
+        if(res.code == RoomManager.Response_RoomInfo){
 
-    module:string = "room";
-    /**
-     * 接收
-     */
-    receive(code:number,data:any):void{
-        console.log("收到服务器数据--code:",code,"data",data);
-        if(code === 11002){
-             console.log("Server发牌");
-             let myPukers:Array<number> = data.pukers;
-             this.pukers1 = myPukers.sort(PukerUtils.sortDESC);
+        }else if(res.code == RoomManager.Response_Reday){
 
-             this.puker = new PukerContainer(this,this.pukers1);
-             this.puker.name = "puker";
-             this.addChild(this.puker);
+        }else if(res.code == RoomManager.Response_DealPoker){
 
-             Socket.send({
-                 key:"room",
-                 code:11001
-             });
-        }else if(code === 11003){
-            console.log("Server已随机选择地主");
-            if(data.self){//自己是地主
-                this.showButton(0);
-            }
-            
-        }else if(code === 11004){
-            console.log("争地主");
-            if(data.self){//可以争地主
-                this.showButton(1);
-            }
-            
-        }else if(code === 11005){
-            console.log("地主已确定");
-            if(data.self){//自己是地主
-                //TODO data.seat 地主的座号
+        }else if(res.code == RoomManager.Response_ToCallTheLandlord){
 
-                this.pukers1 = this.pukers1.concat(data.pukers).sort(PukerUtils.sortDESC);
+        }else if(res.code == RoomManager.Response_LandlordAndLastCard){
 
-                if(this.getChildByName("puker") != null){
-                    this.removeChild(this.getChildByName("puker"));
-                }
-                this.puker = new PukerContainer(this,this.pukers1);
-                this.puker.name = "puker";
-                this.addChild(this.puker);
-
-                this.showButton(2);
-            }else{//刷新地主头像，添加地主的标志
-                this.loadOtherPlayerPortrait(data.seat,null,true);
-            }
-            //显示底牌
-            this.pukerBottom = new PukerBottomContainer(data.pukers);
-            this.pukerBottom.name = "pukerBottom";
-            this.addChild(this.pukerBottom);
-            
-        }else if(code === 11006){
-            console.log("有玩家进入房间");
-            this.loadOtherPlayerPortrait(data.seat,data.name,false);
-            
-        }else if(code === 11007){
-            console.log("有玩家准备/取消准备");
-            
-        }else if(code === 11008){
-            console.log("该谁出牌");
-            if(data.self){//该自己出牌
-                this.showButton(2);
-            }
-        }else if(code === 11009){
-            console.log("其他玩家出牌");
-
-        }else if(code === 11010){
-            console.log("游戏结束");
+        }else if(res.code == RoomManager.Response_Discard){
             
         }
-	}
+        // console.log("onReceiveData:",res.code,res.data);
+    }
+    private  onConnected():void{
+        console.log('webSocket','connect success');
+    }
+
+    private  onConnectClose():void{
+        console.log('webSocket','connect closed');
+    }
+
+    private  onIOError():void{
+        console.log('webSocket','IO Error');
+    }
+  
     /**
      * 加载其他玩家头像
      * seat 座位号
@@ -198,53 +167,17 @@ class PlayerP2P_Single extends egret.DisplayObjectContainer  implements  SocketR
      * 显示游戏场景
      */
     private show(){   
-        Socket.register(this);
-        Socket.send({
-            key:"room",
-            code:"11000"
-        });
-        console.log("正在请求服务器... ...");
+       
 
-        // this.puker = new PukerContainer(this,this.pukers1);
-        // this.puker.name = "puker";
-        // this.addChild(this.puker);
-
-        // this.pukerBottom = new PukerBottomContainer(this.pukers4);
-        // this.pukerBottom.name = "pukerBottom";
-        // this.addChild(this.pukerBottom);
-
-        // this.buttons = new PlayerButtonContainer(this,0);
-        // this.buttons.name = "buttons";
-        // this.addChild(this.buttons);
-
-        this.portraitLeft = new PortraitOtherContainer("等待玩家连接",1,true,false);
-        this.portraitLeft.name = "portraitLeft";
-        this.addChild(this.portraitLeft);
-
-        this.portraitRight = new PortraitOtherContainer("等待玩家连接",2,false,false);
-        this.portraitRight.name = "portraitRight";
-        this.addChild(this.portraitRight);
+        
 
         let portrait:DefaultPortrait = new DefaultPortrait("man",1,360,700,100,100);
         portrait.name = "portrait";
 		this.addChild(portrait);
-        // this.pukerRight = new PukerOtherContainer([10,9,8,7,6,5],false);
-        // this.pukerRight.name = "pukerRight";
-        // this.addChild(this.pukerRight);
+       
 
 
-
-        // this.pukerLeft = new PukerOtherContainer([54,53],true);
-        // this.pukerLeft.name = "pukerLeft";
-        // this.addChild(this.pukerLeft);
-
-        // this.textLeft = new TextOtherContainer("不要",true);
-        // this.textLeft.name = "textLeft";
-        // this.addChild(this.textLeft);
-
-        // this.textRight = new TextOtherContainer("不要",false);
-        // this.textRight.name = "textRight";
-        // this.addChild(this.textRight);
+        
     }
     /**
      * 监听点击“出牌”按钮的动作
@@ -264,30 +197,7 @@ class PlayerP2P_Single extends egret.DisplayObjectContainer  implements  SocketR
                 data:this.pukerSelectArray
             }
         });
-        // console.log("ButtonOkClick--自己的牌:",this.pukers1.toString());
-        // console.log("ButtonOkClick--要出的牌:",this.pukerSelectArray.toString());
-        // this.pukers1 = PukerUtils.removeElements(this.pukers1,this.pukerSelectArray);
-        // console.log("ButtonOkClick--出过后的牌:",this.pukers1.toString());
-
-        // //刷新自己的牌
-        // if(this.getChildByName("puker") != null){
-        //     this.removeChild(this.getChildByName("puker"));
-        // }
-        // this.puker = new PukerContainer(this,this.pukers1);
-        // this.puker.name = "puker";
-        // this.addChild(this.puker);
-
-
-        // //刷新出牌区
-        // if(this.getChildByName("pukerPlay") != null){
-        //     this.removeChild(this.getChildByName("pukerPlay"));
-        // }
-        // this.pukerPlay = new PukerPlayContainer(this.pukerSelectArray);
-        // this.pukerPlay.name = "pukerPlay";
-        // this.addChild(this.pukerPlay);
-        
-        // //清空已选择的牌数组
-        // this.pukerSelectArray = new Array<number>();
+       
     }
     public buttonBuJiao(evt:egret.TouchEvent):void{
         console.log("不叫");

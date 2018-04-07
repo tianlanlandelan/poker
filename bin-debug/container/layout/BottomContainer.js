@@ -53,3 +53,4 @@ var BottomContainer = (function (_super) {
     return BottomContainer;
 }(egret.DisplayObjectContainer));
 __reflect(BottomContainer.prototype, "BottomContainer");
+//# sourceMappingURL=BottomContainer.js.map

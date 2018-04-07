@@ -43,3 +43,4 @@ var PortraitContainer = (function (_super) {
     return PortraitContainer;
 }(egret.DisplayObjectContainer));
 __reflect(PortraitContainer.prototype, "PortraitContainer");
+//# sourceMappingURL=PortraitContainer.js.map

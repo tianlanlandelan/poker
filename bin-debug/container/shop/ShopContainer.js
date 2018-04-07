@@ -127,3 +127,4 @@ var ShopContainer = (function (_super) {
     return ShopContainer;
 }(egret.DisplayObjectContainer));
 __reflect(ShopContainer.prototype, "ShopContainer");
+//# sourceMappingURL=ShopContainer.js.map

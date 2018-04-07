@@ -27,3 +27,4 @@ var SampleDate = (function (_super) {
     return SampleDate;
 }(egret.DisplayObjectContainer));
 __reflect(SampleDate.prototype, "SampleDate");
+//# sourceMappingURL=SampleDate.js.map

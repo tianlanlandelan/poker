@@ -1,7 +1,7 @@
 {
 	"native": {
 		"path_ignore": [],
-		"android_path": "C:/Users/Administrator/puker"
+		"android_path": "puker"
 	},
 	"publish": {
 		"web": 0,

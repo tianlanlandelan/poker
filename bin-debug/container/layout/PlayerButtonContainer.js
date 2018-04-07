@@ -101,3 +101,4 @@ var PlayerButtonContainer = (function (_super) {
     return PlayerButtonContainer;
 }(egret.DisplayObjectContainer));
 __reflect(PlayerButtonContainer.prototype, "PlayerButtonContainer");
+//# sourceMappingURL=PlayerButtonContainer.js.map

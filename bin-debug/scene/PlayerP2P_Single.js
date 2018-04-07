@@ -9,11 +9,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 var PlayerP2P_Single = (function (_super) {
     __extends(PlayerP2P_Single, _super);
     /**
-     * 单房间联机游戏场景
-     * seat 座位号
-     * gamers 房间里的其他人
+     * 联机游戏场景
+     * user  玩家
      */
-    function PlayerP2P_Single(userName, seat, gamers) {
+    function PlayerP2P_Single(user) {
         var _this = _super.call(this) || this;
         //玩家选择的牌
         _this.pukerSelectArray = new Array();
@@ -33,25 +32,49 @@ var PlayerP2P_Single = (function (_super) {
         // this.pukers.slice(34,51).sort(PukerUtils.sortDESC);
         //底牌
         _this.pukers4 = [];
-        _this.module = "room";
-        _this.userName = userName;
+        _this.user = user;
         _this.layout = RES.getRes("layout_json").layout;
-        _this.mySeat = seat;
         var sky = new Layout(_this.layout.stageWidth, _this.layout.stageHeight);
         _this.addChild(sky);
         _this.show();
-        console.log("进入游戏房间，座位号:", _this.mySeat, "其他人:", gamers);
-        //TODO  加载房间里已经有的人的头像和名字
-        if (gamers != null && gamers.length > 0) {
-            for (var i = 0; i < gamers.length; i++) {
-                _this.loadOtherPlayerPortrait(gamers[i].seat, gamers[i].name, false);
-            }
-        }
+        console.log("进入游戏房间");
+        _this.init("ws://127.0.0.1:8080/pokerWebSocket", _this.user.name);
         return _this;
-        // for(let gamer:any in gamers){
-        //     this.loadOtherPlayerPortrait(gamer.seat,gamer.name,false);
-        // }
     }
+    PlayerP2P_Single.prototype.init = function (url, userName) {
+        this.webSocket = new egret.WebSocket();
+        //添加收到数据侦听，收到数据会调用此方法
+        this.webSocket.addEventListener(egret.ProgressEvent.SOCKET_DATA, this.onReceiveData, this);
+        //添加链接打开侦听，连接成功会调用此方法
+        this.webSocket.addEventListener(egret.Event.CONNECT, this.onConnected, this);
+        //添加链接关闭侦听，手动关闭或者服务器关闭连接会调用此方法
+        this.webSocket.addEventListener(egret.Event.CLOSE, this.onConnectClose, this);
+        //添加异常侦听，出现异常会调用此方法
+        this.webSocket.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onIOError, this);
+        // this.webSocket.connect(ip,port);
+        this.webSocket.connectByUrl(url + "/" + userName);
+    };
+    PlayerP2P_Single.prototype.send = function (data) {
+        this.webSocket.writeUTF(this.UUID + JSON.stringify(data));
+    };
+    PlayerP2P_Single.prototype.onReceiveData = function (e) {
+        var response = this.webSocket.readUTF();
+        console.log("onReceiveData:", response);
+        if (response.length == 0) {
+            return;
+        }
+        var res = JSON.parse(response);
+        // console.log("onReceiveData:",res.code,res.data);
+    };
+    PlayerP2P_Single.prototype.onConnected = function () {
+        console.log('webSocket', 'connect success');
+    };
+    PlayerP2P_Single.prototype.onConnectClose = function () {
+        console.log('webSocket', 'connect closed');
+    };
+    PlayerP2P_Single.prototype.onIOError = function () {
+        console.log('webSocket', 'IO Error');
+    };
     /**
      * 接收
      */
@@ -181,42 +204,9 @@ var PlayerP2P_Single = (function (_super) {
      * 显示游戏场景
      */
     PlayerP2P_Single.prototype.show = function () {
-        Socket.register(this);
-        Socket.send({
-            key: "room",
-            code: "11000"
-        });
-        console.log("正在请求服务器... ...");
-        // this.puker = new PukerContainer(this,this.pukers1);
-        // this.puker.name = "puker";
-        // this.addChild(this.puker);
-        // this.pukerBottom = new PukerBottomContainer(this.pukers4);
-        // this.pukerBottom.name = "pukerBottom";
-        // this.addChild(this.pukerBottom);
-        // this.buttons = new PlayerButtonContainer(this,0);
-        // this.buttons.name = "buttons";
-        // this.addChild(this.buttons);
-        this.portraitLeft = new PortraitOtherContainer("等待玩家连接", 1, true, false);
-        this.portraitLeft.name = "portraitLeft";
-        this.addChild(this.portraitLeft);
-        this.portraitRight = new PortraitOtherContainer("等待玩家连接", 2, false, false);
-        this.portraitRight.name = "portraitRight";
-        this.addChild(this.portraitRight);
         var portrait = new DefaultPortrait("man", 1, 360, 700, 100, 100);
         portrait.name = "portrait";
         this.addChild(portrait);
-        // this.pukerRight = new PukerOtherContainer([10,9,8,7,6,5],false);
-        // this.pukerRight.name = "pukerRight";
-        // this.addChild(this.pukerRight);
-        // this.pukerLeft = new PukerOtherContainer([54,53],true);
-        // this.pukerLeft.name = "pukerLeft";
-        // this.addChild(this.pukerLeft);
-        // this.textLeft = new TextOtherContainer("不要",true);
-        // this.textLeft.name = "textLeft";
-        // this.addChild(this.textLeft);
-        // this.textRight = new TextOtherContainer("不要",false);
-        // this.textRight.name = "textRight";
-        // this.addChild(this.textRight);
     };
     /**
      * 监听点击“出牌”按钮的动作
@@ -236,26 +226,6 @@ var PlayerP2P_Single = (function (_super) {
                 data: this.pukerSelectArray
             }
         });
-        // console.log("ButtonOkClick--自己的牌:",this.pukers1.toString());
-        // console.log("ButtonOkClick--要出的牌:",this.pukerSelectArray.toString());
-        // this.pukers1 = PukerUtils.removeElements(this.pukers1,this.pukerSelectArray);
-        // console.log("ButtonOkClick--出过后的牌:",this.pukers1.toString());
-        // //刷新自己的牌
-        // if(this.getChildByName("puker") != null){
-        //     this.removeChild(this.getChildByName("puker"));
-        // }
-        // this.puker = new PukerContainer(this,this.pukers1);
-        // this.puker.name = "puker";
-        // this.addChild(this.puker);
-        // //刷新出牌区
-        // if(this.getChildByName("pukerPlay") != null){
-        //     this.removeChild(this.getChildByName("pukerPlay"));
-        // }
-        // this.pukerPlay = new PukerPlayContainer(this.pukerSelectArray);
-        // this.pukerPlay.name = "pukerPlay";
-        // this.addChild(this.pukerPlay);
-        // //清空已选择的牌数组
-        // this.pukerSelectArray = new Array<number>();
     };
     PlayerP2P_Single.prototype.buttonBuJiao = function (evt) {
         console.log("不叫");
@@ -342,4 +312,5 @@ var PlayerP2P_Single = (function (_super) {
     };
     return PlayerP2P_Single;
 }(egret.DisplayObjectContainer));
-__reflect(PlayerP2P_Single.prototype, "PlayerP2P_Single", ["SocketReceive"]);
+__reflect(PlayerP2P_Single.prototype, "PlayerP2P_Single");
+//# sourceMappingURL=PlayerP2P_Single.js.map

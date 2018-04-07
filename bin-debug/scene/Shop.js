@@ -32,3 +32,4 @@ var Shop = (function (_super) {
     return Shop;
 }(egret.DisplayObjectContainer));
 __reflect(Shop.prototype, "Shop");
+//# sourceMappingURL=Shop.js.map

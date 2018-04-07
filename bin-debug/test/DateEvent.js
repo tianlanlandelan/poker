@@ -23,3 +23,4 @@ var DateEvent = (function (_super) {
 }(egret.Event));
 DateEvent.DATE = "约会";
 __reflect(DateEvent.prototype, "DateEvent");
+//# sourceMappingURL=DateEvent.js.map

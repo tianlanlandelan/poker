@@ -15,3 +15,4 @@ var SocketMiddWare = (function () {
     return SocketMiddWare;
 }());
 __reflect(SocketMiddWare.prototype, "SocketMiddWare");
+//# sourceMappingURL=SocketMiddWare.js.map

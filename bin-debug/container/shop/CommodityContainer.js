@@ -158,3 +158,4 @@ var CommodityContainer = (function (_super) {
     return CommodityContainer;
 }(egret.DisplayObjectContainer));
 __reflect(CommodityContainer.prototype, "CommodityContainer");
+//# sourceMappingURL=CommodityContainer.js.map

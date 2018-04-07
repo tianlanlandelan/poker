@@ -38,13 +38,10 @@ var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         var _this = _super.call(this) || this;
-        _this.isConnectioned = false;
-        _this.user = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
-        _this.module = "hall";
         /**
-         * 是否是单机模式
+         * 加载用户资料，在这里随机产生
          */
-        _this.isOffLineGame = true;
+        _this.user = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         return _this;
     }
@@ -123,59 +120,20 @@ var Main = (function (_super) {
             this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
         }
     };
-    Main.prototype.receive = function (code, data) {
-        console.log("收到服务器数据--code:", code, "data", data);
-        Socket.UUID = data;
-        if (code === 10000) {
-            console.log("已连接到服务器:data", data);
-            Socket.send({
-                module: "gamer",
-                code: 10000,
-                data: {
-                    name: this.user.name
-                }
-            });
-            console.log("已发送用户信息，user:", this.user);
-            this.isConnectioned = true;
-        }
-        else if (code === 10001) {
-            console.log("已分配房间");
-            this.intoRoom(data.seat, data.gamers);
-        }
-    };
     /**
      * 创建游戏场景
      * Create a game scene
      */
     Main.prototype.createGameScene = function () {
-        if (!this.isOffLineGame) {
-            Socket.register(this);
-            Socket.init("192.168.31.108", 8080);
-            console.log("正在请求服务器... ...");
-        }
         /** 舞台大小 */
         var layout = RES.getRes("layout_json").layout;
         this.stage.orientation = egret.OrientationMode.LANDSCAPE;
         this.stage.setContentSize(layout.stageWidth, layout.stageHeight);
         console.log("舞台大小：", this.stage.stageWidth, "*", this.stage.stageHeight);
         /** 起始界面 */
-        var startScene = new StartScene(this.user, this.isOffLineGame);
+        var startScene = new StartScene(this.user);
         startScene.name = "startScene";
         this.addChild(startScene);
-    };
-    /**
-     *
-     * 进入房间
-     * 移除游戏起始界面
-     * 加载游戏界面
-     * seat 座位号
-     */
-    Main.prototype.intoRoom = function (seat, gamers) {
-        if (this.getChildByName("startScene") != null) {
-            this.removeChild(this.getChildByName("startScene"));
-        }
-        var player = new PlayerP2P_Single(this.user.name, seat, gamers);
-        this.addChild(player);
     };
     Main.prototype.createBitmapByName = function (name) {
         var result = new egret.Bitmap();
@@ -185,4 +143,5 @@ var Main = (function (_super) {
     };
     return Main;
 }(egret.DisplayObjectContainer));
-__reflect(Main.prototype, "Main", ["SocketReceive"]);
+__reflect(Main.prototype, "Main");
+//# sourceMappingURL=Main.js.map

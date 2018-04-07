@@ -42,6 +42,9 @@ var GameHall = (function (_super) {
     };
     GameHall.prototype.menuClassicModeClick = function () {
         console.log("menuClassicModeClick---");
+        var player = new PlayerP2P_Single(this.user);
+        this.parent.addChild(player);
+        this.parent.removeChild(this);
     };
     GameHall.prototype.menuFriendModeClick = function () {
         console.log("menuFriendModeClick---");
@@ -49,3 +52,4 @@ var GameHall = (function (_super) {
     return GameHall;
 }(egret.DisplayObjectContainer));
 __reflect(GameHall.prototype, "GameHall");
+//# sourceMappingURL=GameHall.js.map

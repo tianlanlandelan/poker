@@ -39,3 +39,4 @@ var TopContainer = (function (_super) {
     return TopContainer;
 }(egret.DisplayObjectContainer));
 __reflect(TopContainer.prototype, "TopContainer");
+//# sourceMappingURL=TopContainer.js.map

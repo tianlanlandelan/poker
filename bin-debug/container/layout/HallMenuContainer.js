@@ -96,3 +96,4 @@ var HallMenuContainer = (function (_super) {
     return HallMenuContainer;
 }(egret.DisplayObjectContainer));
 __reflect(HallMenuContainer.prototype, "HallMenuContainer");
+//# sourceMappingURL=HallMenuContainer.js.map

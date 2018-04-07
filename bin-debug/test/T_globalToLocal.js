@@ -38,3 +38,4 @@ var T_globalToLocal = (function (_super) {
     return T_globalToLocal;
 }(egret.DisplayObjectContainer));
 __reflect(T_globalToLocal.prototype, "T_globalToLocal");
+//# sourceMappingURL=T_globalToLocal.js.map

@@ -75,3 +75,4 @@ var SpiderContainer = (function (_super) {
     return SpiderContainer;
 }(egret.DisplayObjectContainer));
 __reflect(SpiderContainer.prototype, "SpiderContainer");
+//# sourceMappingURL=SpiderContainer.js.map

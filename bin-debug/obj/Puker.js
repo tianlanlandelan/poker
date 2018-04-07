@@ -30,3 +30,4 @@ var Puker = (function (_super) {
     return Puker;
 }(egret.Bitmap));
 __reflect(Puker.prototype, "Puker");
+//# sourceMappingURL=Puker.js.map

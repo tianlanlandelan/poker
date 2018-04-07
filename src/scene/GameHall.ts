@@ -36,6 +36,9 @@ class GameHall extends egret.DisplayObjectContainer{
 	 }
 	 private menuClassicModeClick(){
 		 console.log("menuClassicModeClick---");
+		 let player:PlayerP2P_Single = new PlayerP2P_Single(this.user);
+         this.parent.addChild(player);
+		 this.parent.removeChild(this);
 	 }
 	 private menuFriendModeClick(){
 		 console.log("menuFriendModeClick---");

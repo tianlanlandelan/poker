@@ -35,6 +35,9 @@ class PukerUtils {
 												"E","E","E","E",//K
 												"B","A"//King
 												];
+	
+	
+
     /**
 	 * 牌面的id
 	 */
@@ -87,6 +90,30 @@ class PukerUtils {
             else return 0;    
     }
 	/**
+	 * 随机生成一副牌，代替原来的init方法
+	 */
+	private static initPokers():Array<Poker>{
+		let pokers:Array<Poker> =new Array<Poker>();
+		let length = this.pukerIds.length;
+		let index:number;
+		let newArray:Array<number> = this.pukerIds.slice();
+		let pukerIndex:number;
+		let array:Array<number> = [];
+		for(let i = 0 ; i < this.pukerIds.length ; i ++){
+			index = Math.floor(Math.random() * newArray.length);
+			pukerIndex = newArray[index];
+			array.push(pukerIndex);
+			newArray = ArrayUtils.slice(newArray,0,index).concat(ArrayUtils.slice(newArray,index + 1,newArray.length));
+			length --;
+		}	
+		console.log(array.toString());
+		
+		for(let i = 0 ; i < array.length ; i ++){
+			pokers.push(new Poker(this.pukerIds[array[i]],this.pukerOrderValues[array[i]]));
+		}
+		return pokers;
+	}
+	/**
 	 * 随机生成一副扑克
 	 */
 	public static init():Array<number>{
@@ -108,36 +135,6 @@ class PukerUtils {
 		}	
 		console.log(array.toString());
 		return array;
-	}
-
-
-
-	/**
-	 * 从一副牌中判断有没有符合条件的顺子
-	 * 
-	 */
-	public static findStraight(){
-		let pattern = /5+6+7+8+9+/;
-		let str = "34456667889";
-		console.log("test:",pattern.test(str)?pattern.exec(str):"没有匹配项");
-	}
-
-	/**
-	 * 从一副牌中判断有没有符合条件的三带
-	 */
-	public static findThree(){
-		let pattern = /7{3,}/;
-		let str = "34577789";
-		console.log("test:",pattern.test(str)?pattern.exec(str):"没有匹配项");
-	}
-
-	/**
-	 * 从一副牌中判断有没有符合条件的对子
-	 */
-	public static findPair(){
-		let pattern =  /7{2,}/;
-		let str = "34577789";
-		console.log("test:",pattern.test(str)?pattern.exec(str):"没有匹配项");
 	}
 
 	public static randomUsers:Array<any> = [

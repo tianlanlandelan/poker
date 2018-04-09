@@ -187,6 +187,10 @@ class PukerSeekUtils {
 	 * length 要压住的顺子的长度
 	 */
 	private static seekStraight(aHandPukerString:Array<string>,typeSort:number,length:number):Array<string>{
+		//天顺，无解
+		if(typeSort == 3){
+			return [];
+		}
 		let index = 0;
 		let result:Array<string> = new Array<string>();
 		let count = 0;
@@ -237,7 +241,29 @@ class PukerSeekUtils {
 		//找不着，返回空
 		return [];
 	}
+	/**
+	 * 查找能压连对的牌形算法
+	 * 1.先取出所有比要压的牌中最小的对子
+	 * 2.取出连续对子
+	 * 3.判断连续对子长度是否大于length
+	 * 4.判断连续对子排序值是否小于typeSort
+	 * aHandPukerString 一手牌
+	 * typeSort 要压住的牌的排序值
+	 * length 要压住的顺子的长度
+	 */
 	private static seekStraightPairs(aHandPukerString:Array<string>,typeSort:number,length:number):Array<string>{
+		let seek :Array<string> = new Array<string>();
+		let result:Array<string> = new Array<string>();
+		for(let i = 0 ; i < aHandPukerString.length ; i ++){
+			if(aHandPukerString[i] === aHandPukerString[i+1] && PukerTypeUtils.orderString.indexOf(aHandPukerString[i]) < typeSort + length /2){
+				seek.push(aHandPukerString[i],aHandPukerString[i+1]);
+				i ++;
+			}
+		}
+		console.log("seekStraightPairs",seek);
+		// for(let i =  ; i < seek.length ; i +=2){
+
+		// }
 		return [];
 	}
 	private static seekPlane(aHandPukerString:Array<string>,typeSort:number):Array<string>{

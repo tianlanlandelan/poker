@@ -247,6 +247,8 @@ class PlayerP2C extends egret.DisplayObjectContainer {
     public buttonJiaoDiZhu(evt:egret.TouchEvent):void{
         console.log("叫地主");
         this.pukers1 = this.pukers1.concat(this.pukers4).sort(PukerUtils.sortDESC);
+        //清空玩家选择的牌
+        this.pukerSelectArray = new Array<number>();
         this.showPukers();
         this.showButtons(2);
         this.showPortrait(true);

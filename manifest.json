@@ -10,8 +10,8 @@
 		"pomelo/bin/pomelo.js"
 	],
 	"game": [
+		"bin-debug/obj/Button.js",
 		"bin-debug/common/socket/Socket.js",
-		"bin-debug/common/socket/SocketMiddWare.js",
 		"bin-debug/common/socket/SocketReceive.js",
 		"bin-debug/container/counter/OtherPukerCountContains.js",
 		"bin-debug/container/layout/BottomContainer.js",
@@ -34,7 +34,7 @@
 		"bin-debug/container/timer/TimerContainer.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
-		"bin-debug/obj/Button.js",
+		"bin-debug/common/socket/SocketMiddWare.js",
 		"bin-debug/obj/DefaultPortrait.js",
 		"bin-debug/obj/HallMenus.js",
 		"bin-debug/obj/Layout.js",

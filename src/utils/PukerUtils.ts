@@ -2,41 +2,33 @@ class PukerUtils {
 	public constructor() {
 	}
 
-	private pukerValues:Array<number> =  [  1,1,1,1,
-											2,2,2,2,
-											3,3,3,3,
-											4,4,4,4,
-											5,5,5,5,
-											6,6,6,6,
-											7,7,7,7,
-											8,8,8,8,
-											9,9,9,9,
-											10,10,10,10,
-											11,11,11,11,
-											12,12,12,12,
-											13,13,13,13,
-											14,14];
+	/**
+	 * 牌大小
+	 */
+	private static pukerSortValues:Array<number> =  [ 
+		12,12,12,12,//A
+		13,13,13,13,//2
+		1,1,1,1,//3
+		2,2,2,2,//4
+		3,3,3,3,//5
+		4,4,4,4,//6
+		5,5,5,5,//7
+		6,6,6,6,//8
+		7,7,7,7,//9
+		8,8,8,8,//10
+		9,9,9,9,//J
+		10,10,10,10,//Q
+		11,11,11,11,//K
+		14,15//King
+	];
 
 	/**
-	 * 牌面对应的牌的大小
+	 * A的大小值
 	 */
-	private static pukerOrderValues:Array<string> = [  "D","D","D","D",//A
-												"C","C","C","C",//2
-												"O","O","O","O",//3
-												"N","N","N","N",//4
-												"M","M","M","M",//5
-												"L","L","L","L",//6
-												"K","K","K","K",//7
-												"J","J","J","J",//8
-												"I","I","I","I",//9
-												"H","H","H","H",//10
-												"G","G","G","G",//J
-												"F","F","F","F",//Q
-												"E","E","E","E",//K
-												"B","A"//King
-												];
-	
-	
+	public static AValue:number = 12;
+	public static BigKingValue:number = 15;
+	public static SmallKingValue:number = 14;
+
 
     /**
 	 * 牌面的id
@@ -57,42 +49,11 @@ class PukerUtils {
 					49,50,51,52,//K
 					53,54];//King
 
-	/**
-	 * 将一手牌的牌面id的表现形式转化为排序规则的表现形式
-	 */
-	public static casePukers(a:Array<number>):Array<string>{
-		let aSort:Array<string> = [];
-		for(let i = 0 ; i < a.length ; i++){
-
-			for(let j = 0 ; j < this.pukerIds.length ; j ++){
-				if(a[i] == this.pukerIds[j]){
-					aSort.push(this.pukerOrderValues[j]);
-				}
-			}
-		}
-		return aSort;
-	}
 
 	/**
-	 * 正序排列的排序条件
+	 * 随机生成一副牌
 	 */
-	public static sortASC(a,b):number{
-            if(a>b) return 1;
-            else if(a<b) return -1;
-            else return 0;    
-    }
-	/**
-	 * 倒序排列的排序条件
-	 */
-	public static sortDESC(a,b):number{
-            if(a>b) return -1;
-            else if(a<b) return 1;
-            else return 0;    
-    }
-	/**
-	 * 随机生成一副牌，代替原来的init方法
-	 */
-	private static initPokers():Array<Poker>{
+	public static getRandomPokers():Array<Poker>{
 		let pokers:Array<Poker> =new Array<Poker>();
 		let length = this.pukerIds.length;
 		let index:number;
@@ -109,32 +70,22 @@ class PukerUtils {
 		console.log(array.toString());
 		
 		for(let i = 0 ; i < array.length ; i ++){
-			pokers.push(new Poker(this.pukerIds[array[i]],this.pukerOrderValues[array[i]]));
+			pokers.push(new Poker(this.pukerIds[array[i]],this.pukerSortValues[array[i]]));
 		}
 		return pokers;
 	}
-	/**
-	 * 随机生成一副扑克
-	 */
-	public static init():Array<number>{
-		let length = this.pukerIds.length;
-		let index:number;
-		let newArray:Array<number> = this.pukerIds.slice();
-		let pukerIndex:number;
-		let array:Array<number> = [];
-		for(let i = 0 ; i < this.pukerIds.length ; i ++){
-			index = Math.floor(Math.random() * newArray.length);
-			pukerIndex = newArray[index];
-			array.push(pukerIndex);
-			// console.log("value:",newArray[index]);
-			// this.slice(newArray,0,index);
-			// this.slice(newArray,index + 1,newArray.length);
-			newArray = ArrayUtils.slice(newArray,0,index).concat(ArrayUtils.slice(newArray,index + 1,newArray.length));
-			// console.log("newArray:",newArray.toString());
-			length --;
-		}	
-		console.log(array.toString());
-		return array;
+
+	public static sortDescPokers(pokers:Array<Poker>):Array<Poker>{
+		for(let i = 0 ; i < pokers.length ; i++){
+			for(let j = 0 ; j < pokers.length - i - 1 ; j ++){
+				if(pokers[j] < pokers[j + 1]){
+					let poker:Poker = pokers[j];
+					pokers[j] = pokers[j + 1];
+					pokers[j + 1] = poker;
+				}
+			}
+		}
+		return pokers;
 	}
 
 	public static randomUsers:Array<any> = [

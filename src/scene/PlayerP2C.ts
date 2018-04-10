@@ -51,34 +51,34 @@ class PlayerP2C extends egret.DisplayObjectContainer {
     /**
      * 当前一手牌
      */
-    private playedPuker:Array<number> = [];
+    private playedPuker:Array<Poker> = [];
     private playedSeat:number = 1;
 
     private player2:any = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
     private player3:any = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
 
     //玩家出的牌
-    private playerPukers1:Array<number> = new Array<number>();
+    private playerPukers1:Array<Poker> = new Array<Poker>();
     //上家出的牌
-    private playerPukers2:Array<number> = new Array<number>();
+    private playerPukers2:Array<Poker> = new Array<Poker>();
     //下家出的牌
-    private playerPukers3:Array<number> = new Array<number>();
+    private playerPukers3:Array<Poker> = new Array<Poker>();
     
     //玩家选择的牌
-    private pukerSelectArray:Array<number> = new Array<number>();
+    private pukerSelectArray:Array<Poker> = new Array<Poker>();
     /**
      * 发牌
      */
     //初始化一副牌（洗牌）
-    private pukers:Array<number> = PukerUtils.init();
+    private pokers:Array<Poker> = PukerUtils.getRandomPokers();
     //玩家1发到的牌
-    private pukers1:Array<number> = this.pukers.slice(0,17).sort(PukerUtils.sortDESC);
+    private pukers1:Array<Poker> = PukerUtils.sortDescPokers(this.pokers.slice(0,17));
     //玩家2发到的牌
-    private pukers2:Array<number> = this.pukers.slice(17,34).sort(PukerUtils.sortDESC);
+    private pukers2:Array<Poker> = PukerUtils.sortDescPokers(this.pokers.slice(17,34));
     //玩家3发到的牌
-    private pukers3:Array<number> = this.pukers.slice(34,51).sort(PukerUtils.sortDESC);
+    private pukers3:Array<Poker> = PukerUtils.sortDescPokers(this.pokers.slice(34,51));
     //底牌
-    private pukers4:Array<number> = this.pukers.slice(51).sort(PukerUtils.sortDESC);
+    private pukers4:Array<Poker> = this.pokers.slice(51);
     private user:any = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
     
     // private sound:egret.Sound = RES.getRes("puker_deal_mp3");
@@ -105,7 +105,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
      */
     private initPukers(){
         let index:number = 17;
-        let pukers:Array<number> = new Array<number>();
+        let pukers:Array<Poker> = new Array<Poker>();
         let i:number = 0 ;
         this.soundChannel = this.sound.play(0,1);
         this.soundChannel.volume = 0.5;
@@ -202,13 +202,13 @@ class PlayerP2C extends egret.DisplayObjectContainer {
         //刷新出牌区
         this.showPukerPlay();
         
-         this.playedPuker = this.pukerSelectArray.sort(PukerUtils.sortDESC);
+         this.playedPuker = PukerUtils.sortDescPokers(this.pukerSelectArray);
          this.playedSeat = 1;
          this.playingSeat = 2;
          this.autoPlay();
 
         //清空已选择的牌数组
-        this.pukerSelectArray = new Array<number>();
+        this.pukerSelectArray = new Array<Poker>();
         this.clearButtons();
     }
     
@@ -248,7 +248,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
         console.log("叫地主");
         this.pukers1 = this.pukers1.concat(this.pukers4).sort(PukerUtils.sortDESC);
         //清空玩家选择的牌
-        this.pukerSelectArray = new Array<number>();
+        this.pukerSelectArray = new Array<Poker>();
         this.showPukers();
         this.showButtons(2);
         this.showPortrait(true);
@@ -293,7 +293,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
     }
     private showPukerPlay(){
         this.clearPukerPlay();
-        this.pukerPlay = new PukerPlayContainer(this.pukerSelectArray.sort(PukerUtils.sortDESC));
+        this.pukerPlay = new PukerPlayContainer(PukerUtils.sortDescPokers(this.pukerSelectArray));
         this.pukerPlay.name = "pukerPlay";
         this.addChild(this.pukerPlay);
     }

@@ -4,7 +4,7 @@ class PukerBottomContainer extends egret.DisplayObjectContainer{
 	 * 这个容器只能显示牌，不能对牌进行操作
 	 * arrays 扑克id的数组
 	 */
-	public constructor(arrays:Array<number>) {
+	public constructor(arrays:Array<Poker>) {
 		super();
 		let pb = RES.getRes("layout_json").pukerBottomContainer;
 		this.x = pb.x;
@@ -24,12 +24,12 @@ class PukerBottomContainer extends egret.DisplayObjectContainer{
     
 	}
 	
-  	private show(arrays:Array<number>){
+  	private show(arrays:Array<Poker>){
 		  let p = RES.getRes("layout_json").puker;
 		  let x = 0;
 		  
 		for(var i = 0; i < arrays.length;i++){
-			let puker:Puker = new Puker(arrays[i],
+			let puker:Puker = new Puker(arrays[i].getId(),
 			x + i * p.pukerSmallSpace,0,
 			p.pukerSmallWidth,p.pukerSmallHeight);
 			this.addChild(puker);

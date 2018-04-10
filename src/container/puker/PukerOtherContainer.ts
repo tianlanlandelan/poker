@@ -8,7 +8,7 @@ class PukerOtherContainer extends egret.DisplayObjectContainer{
 	 * arrays 扑克id的数组
 	 * x 扑克的x坐标
 	 */
-	public constructor(arrays:Array<number>,isLeft:boolean) {
+	public constructor(arrays:Array<Poker>,isLeft:boolean) {
 		super();
 		let pc = RES.getRes("layout_json").pukerOtherContainer;
 		
@@ -35,7 +35,7 @@ class PukerOtherContainer extends egret.DisplayObjectContainer{
 	/**
 	 * 左边玩家出的牌靠左排列，右边玩家出的牌靠右排列
 	 */
-  	private show(arrays:Array<number>,isLeft:boolean){
+  	private show(arrays:Array<Poker>,isLeft:boolean){
 		  let p = RES.getRes("layout_json").puker;
 		  let x = 0;//默认靠左排列
 		  
@@ -43,7 +43,7 @@ class PukerOtherContainer extends egret.DisplayObjectContainer{
 			x =  (20 - arrays.length) * p.pukerSmallSpace;//靠右排列
 		  }
 		for(var i = 0; i < arrays.length;i++){
-			let puker:Puker = new Puker(arrays[i],
+			let puker:Puker = new Puker(arrays[i].getId(),
 			x + i * p.pukerSmallSpace,0,
 			p.pukerSmallWidth,p.pukerSmallHeight);
 			this.addChild(puker);

@@ -7,7 +7,7 @@ class Puker extends egret.Bitmap {
    * w 扑克的宽
    * h 扑克的高
    */
-	public constructor(index,x,y,w,h) {
+	public constructor(index:number,x:number,y:number,w:number,h:number) {
 		var pukerName:string = index + "_png";
     super(RES.getRes(pukerName));
     this.x = x;

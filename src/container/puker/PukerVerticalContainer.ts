@@ -7,7 +7,7 @@ class PukerVerticalContainer extends egret.DisplayObjectContainer{
 	 * arrays 扑克id的数组
 	 * x 扑克的x坐标
 	 */
-	public constructor(arrays:Array<number>,isLeft:boolean) {
+	public constructor(arrays:Array<Poker>,isLeft:boolean) {
 		super();
 		let pc = RES.getRes("layout_json").pukerVerticalContainer;
 		
@@ -34,7 +34,7 @@ class PukerVerticalContainer extends egret.DisplayObjectContainer{
 	/**
 	 * 横着排列
 	 */
-	private show(arrays:Array<number>){
+	private show(arrays:Array<Poker>){
 		  let p = RES.getRes("layout_json").puker;
 		  let x:number = 0;
 		  let y:number = 0;
@@ -45,7 +45,7 @@ class PukerVerticalContainer extends egret.DisplayObjectContainer{
 			if(x >= 10){
 				x = x - 10;
 			}
-			let puker:Puker = new Puker(arrays[i],
+			let puker:Puker = new Puker(arrays[i].getId(),
 			x * p.pukerSmallSpace, y,
 			p.pukerSmallWidth,p.pukerSmallHeight);
 			x ++;
@@ -56,7 +56,7 @@ class PukerVerticalContainer extends egret.DisplayObjectContainer{
 	/**
 	 * 竖着排列
 	 */
-  	private show1(arrays:Array<number>){
+  	private show1(arrays:Array<Poker>){
 		  let p = RES.getRes("layout_json").puker;
 		  let x:number = 0;
 		  let y:number = 0;
@@ -67,7 +67,7 @@ class PukerVerticalContainer extends egret.DisplayObjectContainer{
 			if(y >= 10){
 				y = y - 10;
 			}
-			let puker:Puker = new Puker(arrays[i],
+			let puker:Puker = new Puker(arrays[i].getId(),
 			x, y * p.pukerSmallSpace,
 			p.pukerSmallWidth,p.pukerSmallHeight);
 			y ++;

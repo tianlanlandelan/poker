@@ -5,7 +5,7 @@ class SpiderContainer extends egret.DisplayObjectContainer{
 	 * arrays 扑克id的数组
 	 * x 扑克的x坐标
 	 */
-	public constructor(arrays:Array<number>,x) {
+	public constructor(arrays:Array<Poker>,x) {
 		super();
 		//加载配置参数
 		this.layout = RES.getRes("layout_json").layout;
@@ -30,7 +30,7 @@ class SpiderContainer extends egret.DisplayObjectContainer{
 	 * 配置参数
 	 */
 	private layout ;
-  	private show(arrays:Array<number>,x){
+  	private show(arrays:Array<Poker>,x){
 		for(var i = 0; i < arrays.length;i++){
 			let puker:Puker = new Puker(arrays[i],
 			x + (i+1) * this.layout.pukerBigSpace,20,

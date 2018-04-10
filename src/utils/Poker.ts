@@ -27,4 +27,7 @@ class Poker {
     public getOrderValue():number{
         return this.orderValue;
     }
+    public toString(){
+        return this.id +","+ this.orderValue;
+    }
 }

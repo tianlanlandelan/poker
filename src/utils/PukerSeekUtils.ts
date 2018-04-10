@@ -5,28 +5,7 @@
 class PukerSeekUtils {
 	public constructor() {
 	}
-	/**
-	 * 从一副牌里按照规则挑选出一手牌
-	 * a 规则
-	 * b 一副牌
-	 * 
-	 * 将要比对的牌转成排序值
-	 * 比较排序值，取出牌
-	 */
-	public static seekPuker(a:Array<string>,b:Array<number>):Array<number>{
-		let bString:Array<string> = PukerUtils.casePukers(b);
-		let puker:Array<number> = [];
-		for(let i = 0 ; i < a.length; i ++){
-			for(let j = 0 ; j < bString.length ; j ++){
-				if(a[i] === bString[j]){
-					puker.push(b[j]);
-					bString[j] = "Z";
-					break;
-				}
-			}
-		}
-		return puker;
-	} 
+
 	/**
 	 * TODO
 	 * 从一手牌中判断有没有比指定牌大的牌
@@ -35,13 +14,13 @@ class PukerSeekUtils {
 	 * aHandPuker 一手牌
 	 * b 指定的牌形
 	 */
-	public static seekRight(aHandPuker:Array<number>,pukerType:Array<number>):Array<number>{
-		let myPuker:Array<string> = PukerUtils.casePukers(aHandPuker).sort(PukerUtils.sortASC);
-		let puker:Array<string> = PukerUtils.casePukers(pukerType).sort(PukerUtils.sortASC);
+	public static seekRight(aHandPuker:Array<Poker>,pukerType:Array<Poker>):Array<Poker>{
+		let myPuker:Array<Poker> = PukerUtils.sortDescPokers(aHandPuker);
+		let puker:Array<Poker> = PukerUtils.sortDescPokers(pukerType);
 		console.log("seekRight",myPuker,puker);
 		let bType = PukerTypeUtils.getType(pukerType);
 		let mask:number = 0;
-		let rightPuker:Array<string> = null;
+		let rightPuker:Array<Poker> = null;
 		if(bType.getType() === PukerTypeUtils.typeKingBoom) 			rightPuker =  null;
 		else if(bType.getType() === PukerTypeUtils.typeSingle) 			rightPuker =  this.seekSingle(myPuker,bType.getSort());
 		else if(bType.getType() === PukerTypeUtils.typePair) 			rightPuker =  this.seekPairs(myPuker,bType.getSort());
@@ -60,7 +39,7 @@ class PukerSeekUtils {
 
 		//选好可出的牌型后，从玩家的牌中按照牌形挑选牌面
 		if(rightPuker != null && rightPuker.length > 0){
-			return this.seekPuker(rightPuker,aHandPuker);
+			return rightPuker
 		}else{
 			return [];
 		}
@@ -82,10 +61,10 @@ class PukerSeekUtils {
 	 * typeSort 要压住的牌的排序值，牌越大，排序值越小
 	 * TODO 是否拆牌
 	 */
-	private static seekSingle(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekSingle(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		//从小到大查找能压住的牌
 		for(let j = aHandPukerString.length -1 ; j >= 0; j--){
-			if(PukerTypeUtils.orderString.indexOf(aHandPukerString[j]) < typeSort){
+			if(aHandPukerString[j].getOrderValue() > typeSort){
 				return [aHandPukerString[j]];
 			}
 		}
@@ -97,10 +76,11 @@ class PukerSeekUtils {
 	 * aHandPukerString 一手牌
 	 * typeSort 要压住的牌的排序值
 	 */
-	private static seekPairs(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekPairs(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		//从小到大查找能压住的牌
 		for(let j = aHandPukerString.length -1 ; j >= 1 ; j--){
-			if(aHandPukerString[j] === aHandPukerString[j-1] && PukerTypeUtils.orderString.indexOf(aHandPukerString[j]) < typeSort)
+			if(aHandPukerString[j].getOrderValue() === aHandPukerString[j-1].getOrderValue() 
+				&& aHandPukerString[j].getOrderValue() > typeSort)
 			return [aHandPukerString[j],aHandPukerString[j-1]];
 		}
 		return [];
@@ -110,9 +90,11 @@ class PukerSeekUtils {
 	 * aHandPukerString 一手牌
 	 * typeSort 要压住的牌的排序值
 	 */
-	private static seekThree(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekThree(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		for(let j = aHandPukerString.length -1 ; j >= 2 ; j--){
-			if(aHandPukerString[j] === aHandPukerString[j-1] && aHandPukerString[j] === aHandPukerString[j-2] && PukerTypeUtils.orderString.indexOf(aHandPukerString[j]) < typeSort)
+			if(aHandPukerString[j].getOrderValue() === aHandPukerString[j-1].getOrderValue() 
+				&& aHandPukerString[j].getOrderValue() === aHandPukerString[j-2].getOrderValue() 
+				&& aHandPukerString[j].getOrderValue() > typeSort)
 			return [aHandPukerString[j],aHandPukerString[j-1],aHandPukerString[j-2]];
 		}
 		return [];
@@ -122,12 +104,13 @@ class PukerSeekUtils {
 	 * aHandPukerString 一手牌
 	 * typeSort 要压住的牌的排序值
 	 */
-	private static seekThreeSingle(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekThreeSingle(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		let index = 0;
-		let result:Array<string> = new Array<string>();
+		let result:Array<Poker> = new Array<Poker>();
 		for(let j = aHandPukerString.length -1 ; j >= 2 ; j--){
-			if(aHandPukerString[j] === aHandPukerString[j-1] && aHandPukerString[j] === aHandPukerString[j-2] && PukerTypeUtils.orderString.indexOf(aHandPukerString[j]) < typeSort)
-			{
+			if(aHandPukerString[j].getOrderValue() === aHandPukerString[j-1].getOrderValue() 
+				&& aHandPukerString[j].getOrderValue() === aHandPukerString[j-2].getOrderValue() 
+				&& aHandPukerString[j].getOrderValue() > typeSort){
 				index = j;
 				result.push(aHandPukerString[j],aHandPukerString[j-1],aHandPukerString[j-2]);
 				break;
@@ -147,13 +130,14 @@ class PukerSeekUtils {
 	 * aHandPukerString 一手牌
 	 * typeSort 要压住的牌的排序值
 	 */
-	private static seekThreePair(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekThreePair(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		let index = 0;
-		let result:Array<string> = new Array<string>();
+		let result:Array<Poker> = new Array<Poker>();
 		//找三张
 		for(let j = aHandPukerString.length -1 ; j >= 2 ; j--){
-			if(aHandPukerString[j] === aHandPukerString[j-1] && aHandPukerString[j] === aHandPukerString[j-2] && PukerTypeUtils.orderString.indexOf(aHandPukerString[j]) < typeSort)
-			{
+			if(aHandPukerString[j].getOrderValue() === aHandPukerString[j-1].getOrderValue() 
+				&& aHandPukerString[j].getOrderValue() === aHandPukerString[j-2].getOrderValue() 
+				&& aHandPukerString[j].getOrderValue() > typeSort){
 				index = j;
 				result.push(aHandPukerString[j],aHandPukerString[j-1],aHandPukerString[j-2]);
 				break;
@@ -163,8 +147,7 @@ class PukerSeekUtils {
 		if(index != 0){
 			let index1 = 0;
 			for(let j = aHandPukerString.length -1 ; j >= 2 ; j--){
-				if(aHandPukerString[j] === aHandPukerString[j-1])
-				{
+				if(aHandPukerString[j].getOrderValue() === aHandPukerString[j-1].getOrderValue()){
 					if(j == index || j == index -1  || j == index -2)
 					continue;
 					index1 = j;
@@ -186,15 +169,15 @@ class PukerSeekUtils {
 	 * typeSort 要压住的牌的排序值
 	 * length 要压住的顺子的长度
 	 */
-	private static seekStraight(aHandPukerString:Array<string>,typeSort:number,length:number):Array<string>{
+	private static seekStraight(aHandPukerString:Array<Poker>,typeSort:number,length:number):Array<Poker>{
 		//天顺，无解
 		if(typeSort == 3){
 			return [];
 		}
 		let index = 0;
-		let result:Array<string> = new Array<string>();
+		let result:Array<Poker> = new Array<Poker>();
 		let count = 0;
-		let puker = null;
+		let puker:Poker = null;
 		/*
 		1.从小到大遍历手中的牌（大循环）
 		2.如果当前的牌比要压的牌的最小的那张大，且不大于A(小王、大王和2不能组成顺子)，则将当前牌保存，并判断下一张牌是否比当前牌大（小循环）
@@ -203,14 +186,14 @@ class PukerSeekUtils {
 		5.当下一张牌比当前牌大的超过1（不连续），则清空保存的牌，退出小循环，继续大循坏
 		*/
 		for(let j = aHandPukerString.length - 1 ; j >= 0 ;j --){
-			if(PukerTypeUtils.orderString.indexOf(aHandPukerString[j]) < typeSort + length){
+			if(aHandPukerString[j].getOrderValue() < typeSort + length){
 				puker = aHandPukerString[j];
 				result.push(aHandPukerString[j]);
 				for(let k = j - 1 ; k >= 0 ; k--){
-					let indexK = PukerTypeUtils.orderString.indexOf(aHandPukerString[k]);
-					let indexPuker = PukerTypeUtils.orderString.indexOf(puker);
+					let indexK = aHandPukerString[k].getOrderValue();
+					let indexPuker = puker.getOrderValue();
 					//如果当前的牌比A大，返回空(小王、大王和2不能组成顺子)
-					if(indexK < 3){
+					if(indexK > PukerUtils.AValue){
 						return [];
 					}
 					//如果剩余的牌还没有要压的牌多，直接返回空
@@ -221,7 +204,7 @@ class PukerSeekUtils {
 					if(indexK == indexPuker){
 						continue;
 					}
-					if(indexK == indexPuker - 1){
+					if(indexK -1 == indexPuker){
 						puker = aHandPukerString[k];
 						result.push(aHandPukerString[k]);
 						console.log("seekStraight",result);
@@ -229,19 +212,20 @@ class PukerSeekUtils {
 							return result;
 						}
 					}
-					if(indexK < indexPuker - 1){
-						result = new Array<string>();
+					if(indexK -1 > indexPuker){
+						result = new Array<Poker>();
 						break;
 					}
 
 				}
-				result = new Array<string>();
+				result = new Array<Poker>();
 			}
 		}
 		//找不着，返回空
 		return [];
 	}
 	/**
+	 * TODO
 	 * 查找能压连对的牌形算法
 	 * 1.先取出所有比要压的牌中最小的对子
 	 * 2.取出连续对子
@@ -251,11 +235,12 @@ class PukerSeekUtils {
 	 * typeSort 要压住的牌的排序值
 	 * length 要压住的顺子的长度
 	 */
-	private static seekStraightPairs(aHandPukerString:Array<string>,typeSort:number,length:number):Array<string>{
-		let seek :Array<string> = new Array<string>();
-		let result:Array<string> = new Array<string>();
+	private static seekStraightPairs(aHandPukerString:Array<Poker>,typeSort:number,length:number):Array<Poker>{
+		let seek :Array<Poker> = new Array<Poker>();
+		let result:Array<Poker> = new Array<Poker>();
 		for(let i = 0 ; i < aHandPukerString.length ; i ++){
-			if(aHandPukerString[i] === aHandPukerString[i+1] && PukerTypeUtils.orderString.indexOf(aHandPukerString[i]) < typeSort + length /2){
+			if(aHandPukerString[i].getOrderValue() === aHandPukerString[i+1].getOrderValue() 
+				&& aHandPukerString[i].getOrderValue() > typeSort - length /2){
 				seek.push(aHandPukerString[i],aHandPukerString[i+1]);
 				i ++;
 			}
@@ -266,27 +251,27 @@ class PukerSeekUtils {
 		// }
 		return [];
 	}
-	private static seekPlane(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekPlane(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		return [];
 	}
-	private static seekPlane2Single(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekPlane2Single(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		return [];
 	}
-	private static seekPlane2Pairs(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekPlane2Pairs(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		return [];
 	}
-	private static seekFour2Single(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekFour2Single(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		return [];
 	}
 
-	private static seekFour2Pairs(aHandPukerString:Array<string>,typeSort:number):Array<string>{
+	private static seekFour2Pairs(aHandPukerString:Array<Poker>,typeSort:number):Array<Poker>{
 		return [];
 	}
 	/**
 	 * TODO 
 	 * 随机出牌
 	 */
-	public static randomPlay(myPuker:Array<number>):Array<number>{
+	public static randomPlay(myPuker:Array<Poker>):Array<Poker>{
 
 		return [myPuker[myPuker.length-1]];
 	}
@@ -297,7 +282,7 @@ class PukerSeekUtils {
 	 * puker 玩家出的一手牌（我要压的牌）
 	 * seat 出牌玩家的座位号
 	 */
-	public static autoPlay(myPuker:Array<number>,mySeat:number,landlordSeat:number,puker:Array<number>,seat:number):Array<number>{
+	public static autoPlay(myPuker:Array<Poker>,mySeat:number,landlordSeat:number,puker:Array<Poker>,seat:number):Array<Poker>{
 		console.log("轮到我出牌了，座位号：",mySeat,"上家出牌，座位号：",seat,"地主座位号：",landlordSeat);
 		if(myPuker == null || myPuker.length == 0){
 			console.log("没牌了");

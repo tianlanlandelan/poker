@@ -45,7 +45,7 @@ class PukerVerticalContainer extends egret.DisplayObjectContainer{
 			if(x >= 10){
 				x = x - 10;
 			}
-			let puker:Puker = new Puker(arrays[i].getId(),
+			let puker:Puker = new Puker(arrays[i],
 			x * p.pukerSmallSpace, y,
 			p.pukerSmallWidth,p.pukerSmallHeight);
 			x ++;
@@ -67,7 +67,7 @@ class PukerVerticalContainer extends egret.DisplayObjectContainer{
 			if(y >= 10){
 				y = y - 10;
 			}
-			let puker:Puker = new Puker(arrays[i].getId(),
+			let puker:Puker = new Puker(arrays[i],
 			x, y * p.pukerSmallSpace,
 			p.pukerSmallWidth,p.pukerSmallHeight);
 			y ++;

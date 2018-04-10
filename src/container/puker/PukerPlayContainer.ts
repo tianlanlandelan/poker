@@ -31,7 +31,7 @@ class PukerPlayContainer extends egret.DisplayObjectContainer{
 		  let x =  (20 - arrays.length) * 0.5 * p.pukerPlaySpace;//居中排列
 		  
 		for(var i = 0; i < arrays.length;i++){
-			let puker:Puker = new Puker(arrays[i].getId(),
+			let puker:Puker = new Puker(arrays[i],
 			x + i * p.pukerPlaySpace,0,
 			p.pukerPlayWidth,p.pukerPlayHeight);
 			this.addChild(puker);

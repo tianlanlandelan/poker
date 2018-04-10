@@ -67,26 +67,26 @@ class PukerUtils {
 			newArray = ArrayUtils.slice(newArray,0,index).concat(ArrayUtils.slice(newArray,index + 1,newArray.length));
 			length --;
 		}	
-		console.log(array.toString());
-		
-		for(let i = 0 ; i < array.length ; i ++){
-			pokers.push(new Poker(this.pukerIds[array[i]],this.pukerSortValues[array[i]]));
+		console.log("array ",array.length,"-------",array.toString());
+		for(let j = 0 ; j < array.length ; j ++){
+			pokers.push(new Poker(this.pukerIds[array[j]],this.pukerSortValues[array[j]]));
 		}
+		console.log("已随机生成一副牌",pokers.toString());
 		return pokers;
 	}
 
 	public static sortDescPokers(pokers:Array<Poker>):Array<Poker>{
-		for(let i = 0 ; i < pokers.length ; i++){
-			for(let j = 0 ; j < pokers.length - i - 1 ; j ++){
-				if(pokers[j] < pokers[j + 1]){
-					let poker:Poker = pokers[j];
-					pokers[j] = pokers[j + 1];
-					pokers[j + 1] = poker;
-				}
-			}
-		}
-		return pokers;
+		return pokers.sort(this.sortDesc);
 	}
+	/**
+	 * 倒序排列的排序条件
+	 */
+	public static sortDesc(a:Poker,b:Poker):number{
+			if(a.getOrderValue() < b .getOrderValue()) return 1;
+			else if(a .getOrderValue() > b.getOrderValue()) return -1;
+            else return 0;    
+    }
+
 
 	public static randomUsers:Array<any> = [
         {uid:"1001",name:"大可",sex:"man"},

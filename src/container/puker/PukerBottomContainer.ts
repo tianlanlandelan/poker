@@ -29,7 +29,7 @@ class PukerBottomContainer extends egret.DisplayObjectContainer{
 		  let x = 0;
 		  
 		for(var i = 0; i < arrays.length;i++){
-			let puker:Puker = new Puker(arrays[i].getId(),
+			let puker:Puker = new Puker(arrays[i],
 			x + i * p.pukerSmallSpace,0,
 			p.pukerSmallWidth,p.pukerSmallHeight);
 			this.addChild(puker);

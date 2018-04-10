@@ -43,7 +43,7 @@ class PukerOtherContainer extends egret.DisplayObjectContainer{
 			x =  (20 - arrays.length) * p.pukerSmallSpace;//靠右排列
 		  }
 		for(var i = 0; i < arrays.length;i++){
-			let puker:Puker = new Puker(arrays[i].getId(),
+			let puker:Puker = new Puker(arrays[i],
 			x + i * p.pukerSmallSpace,0,
 			p.pukerSmallWidth,p.pukerSmallHeight);
 			this.addChild(puker);

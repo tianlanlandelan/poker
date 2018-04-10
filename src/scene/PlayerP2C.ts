@@ -30,7 +30,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
     /**
      * 是否是开发模式，开发模式下将显示明牌
      */
-    private isDevelop:boolean = false;
+    private isDevelop:boolean = true;
 
     private poc1Index:number = Math.floor(Math.random() * 10) + 1;
     private poc2Index:number = Math.floor(Math.random() * 10) + 1;
@@ -223,7 +223,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
         this.clearButtons();
         let randNumber:number = Math.floor(Math.random() * 2);
         if(randNumber === 0){//下家叫地主
-            this.pukers2 = this.pukers2.concat(this.pukers4).sort(PukerUtils.sortDESC);
+            this.pukers2 = PukerUtils.sortDescPokers(this.pukers2.concat(this.pukers4));
              if(this.isDevelop) this.showPukerVertival(2);
             this.showCount(2,this.pukers2.length);
             this.playingSeat = 2;
@@ -231,7 +231,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
             this.autoPlay();
             this.showOtherPortrait(2,true);
         }else{//上家叫地主
-            this.pukers3 = this.pukers3.concat(this.pukers4).sort(PukerUtils.sortDESC);
+            this.pukers3 = PukerUtils.sortDescPokers(this.pukers3.concat(this.pukers4));
              if(this.isDevelop) this.showPukerVertival(3);
             this.showCount(3,this.pukers3.length);
             this.playingSeat = 3;
@@ -246,7 +246,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
      */
     public buttonJiaoDiZhu(evt:egret.TouchEvent):void{
         console.log("叫地主");
-        this.pukers1 = this.pukers1.concat(this.pukers4).sort(PukerUtils.sortDESC);
+        this.pukers1 = PukerUtils.sortDescPokers(this.pukers1.concat(this.pukers4));
         //清空玩家选择的牌
         this.pukerSelectArray = new Array<Poker>();
         this.showPukers();
@@ -366,7 +366,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
                 this.showTextTip(this.playingSeat);
             }else{//出牌
                 this.showOtherPuker(2);
-                this.pukers2 = ArrayUtils.removeElements(this.pukers2,this.playerPukers2).sort(PukerUtils.sortDESC);
+                this.pukers2 = PukerUtils.sortDescPokers(ArrayUtils.removeElements(this.pukers2,this.playerPukers2));
                 if(this.isDevelop) this.showPukerVertival(2);
                 this.playedPuker = this.playerPukers2;
                 this.playedSeat = 2;
@@ -382,7 +382,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
                 this.showTextTip(this.playingSeat);
             }else{//出牌
                 this.showOtherPuker(3);
-                this.pukers3 = ArrayUtils.removeElements(this.pukers3,this.playerPukers3).sort(PukerUtils.sortDESC);
+                this.pukers3 = PukerUtils.sortDescPokers(ArrayUtils.removeElements(this.pukers3,this.playerPukers3));
                 
                 if(this.isDevelop) this.showPukerVertival(3);
                 this.playedPuker = this.playerPukers3;
@@ -404,14 +404,15 @@ class PlayerP2C extends egret.DisplayObjectContainer {
       let y = p.pukerUpMove;
 	  let draggedObject:egret.Bitmap = evt.currentTarget;
 	  //显示扑克的y坐标和扑克的名称
-	
+	    let id:number = parseInt(draggedObject.name.split(",")[0]);
+        let orderValue:number = parseInt(draggedObject.name.split(",")[1]);
       if(draggedObject.y == y){//选中牌，将牌加入数组
         draggedObject.y = 0;
-        this.pukerSelectArray.push(parseInt(draggedObject.name));
+        this.pukerSelectArray.push(new Poker(id,orderValue));
         
       }else{//取消选中牌，将牌从数组中移除
         draggedObject.y = y;
-        this.pukerSelectArray = ArrayUtils.removeElements(this.pukerSelectArray,[parseInt(draggedObject.name)])
+        this.pukerSelectArray = ArrayUtils.removeElements(this.pukerSelectArray,[new Poker(id,orderValue)])
 
       }
       

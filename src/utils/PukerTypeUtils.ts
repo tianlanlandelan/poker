@@ -22,9 +22,11 @@ class PukerTypeUtils {
 	public static typeFour2Pairs:string 	= "typeFour2Pairs";
 	/**
 	 * 获取一手牌的类型
-	 * pokers 从大到小排列的一手牌
+	 * pokers 一手牌
 	 */
 	public static getType(pokers:Array<Poker>):PukerType{
+		//先将牌从大到小排序
+		pokers = PukerUtils.sortDescPokers(pokers);
 		let orderValue:number = -1;
 		if((orderValue = this.isBoom(pokers)) != -1) 			
 			return new PukerType(this.typeBoom,orderValue);
@@ -221,10 +223,10 @@ class PukerTypeUtils {
 				&& array[i].getOrderValue() == array[i+2].getOrderValue()){
 				three.push(array[i]);
 			}
-			newArray = newArray.concat(ArrayUtils.removeElements(array,[array[i],array[i+1],array[i+2]]));
+			newArray = newArray.concat(PukerUtils.removePokers(array,[array[i],array[i+1],array[i+2]]));
 		}
 		if(three.length != 2) return -1;
-		newArray = ArrayUtils.removeElements(array,newArray);
+		newArray = PukerUtils.removePokers(array,newArray);
 		for(let i = 0 ; i < newArray.length -1; i += 2){
 			if(newArray[i].getOrderValue() !== newArray[i+1].getOrderValue()) return -1;
 		}
@@ -258,7 +260,7 @@ class PukerTypeUtils {
 			if(array[i].getOrderValue() === array[i+1].getOrderValue()
 			&& array[i].getOrderValue() ===array[i+2].getOrderValue() 
 			&& array[i].getOrderValue() === array[i+3].getOrderValue()){
-				newArray = newArray.concat(ArrayUtils.removeElements(array,[array[i],array[i+1],array[i+2],array[i+3]]));
+				newArray = newArray.concat(PukerUtils.removePokers(array,[array[i],array[i+1],array[i+2],array[i+3]]));
 				four = array[i];
 			}
 				

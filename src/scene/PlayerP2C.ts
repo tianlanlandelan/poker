@@ -191,7 +191,8 @@ class PlayerP2C extends egret.DisplayObjectContainer {
             console.log("你这选的是啥呀");
             return;
         }
-        this.pukers1 = ArrayUtils.removeElements(this.pukers1,this.pukerSelectArray);
+        this.pukers1 = PukerUtils.removePokers(this.pukers1,this.pukerSelectArray);
+        console.log("已出牌，剩余牌数",this.pukers1)
         //刷新自己的牌
         if(this.getChildByName("puker") != null){
             this.removeChild(this.getChildByName("puker"));
@@ -263,7 +264,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
     public buttonBuYao(evt:egret.TouchEvent):void{
         
         if(this.landlordSeat == 1 && this.pukers1.length == 20){
-            console.log("地主首张牌");
+            console.log("地主首张牌",this.pukers1.length);
         }else{
             this.clearButtons();
             this.playingSeat = 2;
@@ -366,7 +367,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
                 this.showTextTip(this.playingSeat);
             }else{//出牌
                 this.showOtherPuker(2);
-                this.pukers2 = PukerUtils.sortDescPokers(ArrayUtils.removeElements(this.pukers2,this.playerPukers2));
+                this.pukers2 = PukerUtils.sortDescPokers(PukerUtils.removePokers(this.pukers2,this.playerPukers2));
                 if(this.isDevelop) this.showPukerVertival(2);
                 this.playedPuker = this.playerPukers2;
                 this.playedSeat = 2;
@@ -382,7 +383,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
                 this.showTextTip(this.playingSeat);
             }else{//出牌
                 this.showOtherPuker(3);
-                this.pukers3 = PukerUtils.sortDescPokers(ArrayUtils.removeElements(this.pukers3,this.playerPukers3));
+                this.pukers3 = PukerUtils.sortDescPokers(PukerUtils.removePokers(this.pukers3,this.playerPukers3));
                 
                 if(this.isDevelop) this.showPukerVertival(3);
                 this.playedPuker = this.playerPukers3;
@@ -412,8 +413,11 @@ class PlayerP2C extends egret.DisplayObjectContainer {
         
       }else{//取消选中牌，将牌从数组中移除
         draggedObject.y = y;
-        this.pukerSelectArray = ArrayUtils.removeElements(this.pukerSelectArray,[new Poker(id,orderValue)])
-
+        let poker = new Poker(id,orderValue);
+        console.log("poker",poker.toString(),"array",this.pukerSelectArray);
+        
+        this.pukerSelectArray = PukerUtils.removePokers(this.pukerSelectArray,[poker]);
+        console.log("removedArray",this.pukerSelectArray)
       }
       
     }

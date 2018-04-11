@@ -28,6 +28,6 @@ class Poker {
         return this.orderValue;
     }
     public toString(){
-        return this.id +","+ this.orderValue;
+        return "[" + this.id +","+ this.orderValue + "]";
     }
 }

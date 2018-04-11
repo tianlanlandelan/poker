@@ -28,7 +28,7 @@ class PukerCompareUtils {
 		let aType:PukerType = PukerTypeUtils.getType(aSort);
 		let bType:PukerType = PukerTypeUtils.getType(bSort);
 		if(aType == null || bType == null || aType.getType() != bType.getType()) return false;//牌型3不相等
-		return aType.getSort() < bType.getSort();
+		return aType.getSort() > bType.getSort();
 	}
 	/**
 	 * 比较单牌的大小

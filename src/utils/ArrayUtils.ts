@@ -20,7 +20,7 @@ class ArrayUtils {
 		}
 		return array;
 	}
-	public static slice(array:Array<number>,i:number,j:number):Array<number>{
+	public static slice(array:Array<any>,i:number,j:number):Array<any>{
 		if(i < 0 || j < 0 || i > array.length || j > array.length){
 			return [];
 		}else{

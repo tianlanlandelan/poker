@@ -272,20 +272,20 @@ class PlayerP2P_Single extends egret.DisplayObjectContainer{
      */
     public pukerClick(evt:egret.TouchEvent):void{
       
-      let p = RES.getRes("layout_json").puker;
-      let y = p.pukerUpMove;
-	  let draggedObject:egret.Bitmap = evt.currentTarget;
-	  //显示扑克的y坐标和扑克的名称
-	//   console.log("pukerClick: y:",draggedObject.y,draggedObject.name);
-      if(draggedObject.y == y){//选中牌，将牌加入数组
-        draggedObject.y = 0;
-        this.pukerSelectArray.push(parseInt(draggedObject.name));
+    //   let p = RES.getRes("layout_json").puker;
+    //   let y = p.pukerUpMove;
+	//   let draggedObject:egret.Bitmap = evt.currentTarget;
+	//   //显示扑克的y坐标和扑克的名称
+	// //   console.log("pukerClick: y:",draggedObject.y,draggedObject.name);
+    //   if(draggedObject.y == y){//选中牌，将牌加入数组
+    //     draggedObject.y = 0;
+    //     this.pukerSelectArray.push(parseInt(draggedObject.name));
         
-      }else{//取消选中牌，将牌从数组中移除
-        draggedObject.y = y;
-        this.pukerSelectArray = ArrayUtils.removeElements(this.pukerSelectArray,[parseInt(draggedObject.name)])
+    //   }else{//取消选中牌，将牌从数组中移除
+    //     draggedObject.y = y;
+    //     this.pukerSelectArray = PukerUtils.removePokers(this.pukerSelectArray,[parseInt(draggedObject.name)])
 
-      }
+    //   }
       
     }
 	

@@ -67,9 +67,10 @@ class PukerUtils {
 			newArray = ArrayUtils.slice(newArray,0,index).concat(ArrayUtils.slice(newArray,index + 1,newArray.length));
 			length --;
 		}	
-		console.log("array ",array.length,"-------",array.toString());
+		// console.log("array ",array.length,"-------",array.toString());
 		for(let j = 0 ; j < array.length ; j ++){
-			pokers.push(new Poker(this.pukerIds[array[j]],this.pukerSortValues[array[j]]));
+			let poker:Poker = new Poker(this.pukerIds[array[j] - 1],this.pukerSortValues[array[j] -1])
+			pokers.push(poker);
 		}
 		console.log("已随机生成一副牌",pokers.toString());
 		return pokers;
@@ -78,6 +79,27 @@ class PukerUtils {
 	public static sortDescPokers(pokers:Array<Poker>):Array<Poker>{
 		return pokers.sort(this.sortDesc);
 	}
+
+	/**
+	 * 从一个数组中移除一些元素
+	 * 使用 ArrayUtils.removeElements时发现，其对对象数组无效，自己写了一个
+	 */
+	public static removePokers(array:Array<Poker>,elements:Array<Poker>):Array<Poker>{
+		let result:Array<Poker> = new Array<Poker>();
+		for(let i = 0 ; i < array.length ; i ++){
+			let falg:boolean = false;
+			for(let j = 0 ; j < elements.length ; j ++){
+				if(array[i].getId() == elements[j].getId()){
+					falg = true;
+				}
+			}
+			if(!falg){
+				result.push(array[i]);
+			}
+		}
+		return result;
+	}
+
 	/**
 	 * 倒序排列的排序条件
 	 */

@@ -171,7 +171,7 @@ class PukerSeekUtils {
 	 */
 	private static seekStraight(aHandPukerString:Array<Poker>,typeSort:number,length:number):Array<Poker>{
 		//天顺，无解
-		if(typeSort == 3){
+		if(typeSort == PukerUtils.AValue){
 			return [];
 		}
 		let index = 0;
@@ -186,7 +186,7 @@ class PukerSeekUtils {
 		5.当下一张牌比当前牌大的超过1（不连续），则清空保存的牌，退出小循环，继续大循坏
 		*/
 		for(let j = aHandPukerString.length - 1 ; j >= 0 ;j --){
-			if(aHandPukerString[j].getOrderValue() < typeSort + length){
+			if(aHandPukerString[j].getOrderValue() > typeSort - length + 1){
 				puker = aHandPukerString[j];
 				result.push(aHandPukerString[j]);
 				for(let k = j - 1 ; k >= 0 ; k--){

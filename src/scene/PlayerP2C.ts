@@ -326,6 +326,8 @@ class PlayerP2C extends egret.DisplayObjectContainer {
         let result: GameResultContainer = new GameResultContainer(isVictory);
         result.name = "result";
         this.addChild(result);
+        //TODO 这有个问题，showButtons没有起作用，需要排查
+        console.log("showResult 游戏结束");
         this.showButtons(RoomManager.ButtonsGameOver);
     }
     /**

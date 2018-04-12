@@ -30,7 +30,7 @@ class PlayerButtonContainer extends egret.DisplayObjectContainer{
 	}
 	
   	private show(player,type:number){
-		if(type == 0){
+		if(type == RoomManager.ButtonsCallTheLandlord){
 			/** 不叫 */
 			let buttonTip:Button = new Button("nocall",150,0,300,200);
 			buttonTip.touchEnabled = true;
@@ -45,7 +45,7 @@ class PlayerButtonContainer extends egret.DisplayObjectContainer{
 			this.addChild(buttonOK);
 			// let textOk:TextTip = new TextTip("叫地主",554,6,64);
 			// this.addChild(textOk);
-		}else if(type == 1){
+		}else if(type == RoomManager.ButtonsFight4TheLandlord){
 			/** 不抢 */
 			let buttonTip:Button = new Button("pass",250,0,200,50);
 			buttonTip.touchEnabled = true;
@@ -61,7 +61,7 @@ class PlayerButtonContainer extends egret.DisplayObjectContainer{
 			let textOk:TextTip = new TextTip("抢地主",554,6,64);
 			this.addChild(textOk);
 		}
-		else if(type == 2){
+		else if(type == RoomManager.ButtonsDiscard){
 			/** 不要 */
 			let buttonPass:Button = new Button("pass",25,0,300,200);
 			buttonPass.touchEnabled = true;
@@ -83,17 +83,17 @@ class PlayerButtonContainer extends egret.DisplayObjectContainer{
 			this.addChild(buttonOK);
 			// let textOk:TextTip = new TextTip("出牌",736,6,64);
 			// this.addChild(textOk);
-		}else if(type == 3){
+		}else if(type == RoomManager.ButtonsGameOver){
 			/** 离开房间 */
 			let buttonLeave:Button = new Button("leaveRoom",250,0,300,200);
 			buttonLeave.touchEnabled = true;
-			buttonLeave.addEventListener(egret.TouchEvent.TOUCH_TAP,player.buttonJieShu,player);
+			buttonLeave.addEventListener(egret.TouchEvent.TOUCH_TAP,player.button_gameOver,player);
 			this.addChild(buttonLeave);
 
 			/** 再来一把 */
 			let buttonAgain:Button = new Button("newGame",550,0,300,200);
 			buttonAgain.touchEnabled = true;
-			buttonAgain.addEventListener(egret.TouchEvent.TOUCH_TAP,player.buttonZaiLai,player);
+			buttonAgain.addEventListener(egret.TouchEvent.TOUCH_TAP,player.button_restart,player);
 			this.addChild(buttonAgain);
 		}
 

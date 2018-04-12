@@ -44,4 +44,21 @@ class RoomManager {
      */
     public static  Response_Discard = 2007;
 
+    /**
+     * 叫地主按钮组类型
+     */
+    public static ButtonsCallTheLandlord = 0;
+    /**
+     * 抢地主按钮组
+     */
+    public static ButtonsFight4TheLandlord = 1;
+    /**
+     * 出牌按钮组
+     */
+    public static ButtonsDiscard = 2;
+    /**
+     * 游戏结束按钮组
+     */
+    public static ButtonsGameOver = 3;
+
 }

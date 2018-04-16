@@ -2,3 +2,9 @@ Server端：spring-boot + netty+ spring-data-redis + mysql
 一期：spring-boot + netty + mysql
 二期：spring-boot + netty+ spring-data-redis + mysql
 三期：spring-boot + netty+ spring-data-redis（集群、读写分离） + mysql（集群）
+
+Client端：
+一期：单机
+二期：联机、道具
+三期：好友
+四期：商城

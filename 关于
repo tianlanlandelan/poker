@@ -1,0 +1,4 @@
+Server端：spring-boot + netty+ spring-data-redis + mysql
+一期：spring-boot + netty + mysql
+二期：spring-boot + netty+ spring-data-redis + mysql
+三期：spring-boot + netty+ spring-data-redis（集群、读写分离） + mysql（集群）

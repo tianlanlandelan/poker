@@ -5,7 +5,7 @@ class RoomManager {
     /**
      * Client请求进入房间
      */
-    public static  Request_oRoom = 1001;
+    public static  Request_onRoom = 1001;
     /**
      * Client准备就绪
      */

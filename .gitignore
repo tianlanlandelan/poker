@@ -1,2 +1,4 @@
 /bin-debug/
 /.git-credentials
+/egretProperties.json
+/manifest.json

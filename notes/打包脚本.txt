@@ -2,4 +2,4 @@
 
 
 
-egret create_app puker -f D:\EgretProjects\helloworld -t D:\egret-android-support-5.0.3\egret-android-support-5.0.3
+egret create_app D:\AndroidProject\poker -f D:\EgretProjects\poker -t D:\egret-android-support-5.0.3\egret-android-support-5.0.3

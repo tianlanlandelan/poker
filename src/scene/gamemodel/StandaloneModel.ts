@@ -1,7 +1,7 @@
 /**
  * 单机游戏场景
  */
-class PlayerP2C extends egret.DisplayObjectContainer {
+class StandaloneModel extends egret.DisplayObjectContainer {
 
     /**
      * 容器
@@ -54,8 +54,8 @@ class PlayerP2C extends egret.DisplayObjectContainer {
     private playedPuker: Array<Poker> = [];
     private playedSeat: number = 1;
 
-    private player2: any = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
-    private player3: any = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
+    private player2: User = PukerUtils.getRandomUser();
+    private player3: User = PukerUtils.getRandomUser();
 
     //玩家出的牌
     private playerPukers1: Array<Poker> = new Array<Poker>();
@@ -79,7 +79,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
     private pukers3: Array<Poker> = PukerUtils.sortDescPokers(this.pokers.slice(34, 51));
     //底牌
     private pukers4: Array<Poker> = this.pokers.slice(51);
-    private user: any = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
+    private user: User;
 
     // private sound:egret.Sound = RES.getRes("puker_deal_mp3");
     private sound: egret.Sound = RES.getRes("bg_guzheng_mp3");
@@ -88,7 +88,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
 	/**
 	 * 单机游戏场景
 	 */
-    public constructor(user: any) {
+    public constructor(user: User) {
         super();
         this.user = user;
         this.layout = RES.getRes("layout_json").layout;
@@ -300,7 +300,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
      * 再来一局
      */
     public button_restart(): void {
-        let playerP2c: PlayerP2C = new PlayerP2C(this.user);
+        let playerP2c: StandaloneModel = new StandaloneModel(this.user);
         this.parent.addChild(playerP2c);
         this.parent.removeChild(this);
     }
@@ -448,12 +448,7 @@ class PlayerP2C extends egret.DisplayObjectContainer {
         }
 
     }
-    private test() {
-        let index = 10;
-        this.createTimer(1000, index,
-            () => { console.log(index), index-- },
-            () => { console.log("计时结束") })
-    }
+    
     private createTimer(delay: number, times: number, timerRun = (times: number) => { }, timerEnd = () => { }) {
         var timer: egret.Timer = new egret.Timer(delay, times);
         timer.addEventListener(egret.TimerEvent.TIMER, timerRun, this);

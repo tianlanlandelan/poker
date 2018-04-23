@@ -1,9 +1,9 @@
 class HallMenuContainer extends egret.DisplayObjectContainer{
-	public constructor(user:any,gameHall) {
+	public constructor(user:User,gameHall) {
 		super();
 		this.show(user,gameHall);
 	}
-	private show(user:any,gameHall){
+	private show(user:User,gameHall){
 		let menuSetting:HallMenus = new HallMenus("menu_setting_png",40,40,160,160);
 		menuSetting.touchEnabled = true;
 		menuSetting.addEventListener(egret.TouchEvent.TOUCH_TAP,this.menuSettingClick,gameHall);

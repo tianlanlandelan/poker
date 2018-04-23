@@ -6,7 +6,7 @@ class PortraitOtherContainer extends egret.DisplayObjectContainer{
 	 * isLeft 是否是左边的玩家
 	 * isLandlord 是否是地主
 	 */
-	public constructor(user:any,index:number,isLeft:boolean,isLandlord:boolean) {
+	public constructor(user:User,index:number,isLeft:boolean,isLandlord:boolean) {
 		super();
 		let pc = RES.getRes("layout_json").portraitOtherContainer;
 		
@@ -28,7 +28,7 @@ class PortraitOtherContainer extends egret.DisplayObjectContainer{
 		// this.addChild(bg);
 
 
-		let playerName:TextTip = new TextTip(user.name,0,100,16);
+		let playerName:TextTip = new TextTip(user.getName(),0,100,16);
 		playerName.width  = 100;
 		this.addChild(playerName);
 		if(isLandlord){
@@ -36,13 +36,13 @@ class PortraitOtherContainer extends egret.DisplayObjectContainer{
 			playerName.width  = 100;
 			this.addChild(playerName);
 		}
-		this.show(user.sex,index);
+		this.show(user,index);
     
 	}
 	
-  	private show(user:any,index:number){
+  	private show(user:User,index:number){
 		  
-	  	let portrait:DefaultPortrait = new DefaultPortrait(user.sex,index,0,0,100,100);
+		  let portrait:DefaultPortrait = new DefaultPortrait(user.getSex(),index,0,0,100,100);
 		this.addChild(portrait);
 	}
 }

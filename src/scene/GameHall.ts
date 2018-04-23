@@ -1,5 +1,5 @@
 class GameHall extends egret.DisplayObjectContainer{
-	public constructor(user:any) {
+	public constructor(user:User) {
 		super();
 		this.user = user;
 		this.width = 1920;
@@ -13,7 +13,7 @@ class GameHall extends egret.DisplayObjectContainer{
 		this.addChild(bg);
 		this.show();
 	}
-	private user:any;
+	private user:User;
 	private topContainer:TopContainer = new TopContainer();
 	private bottomContainer:BottomContainer = new BottomContainer(0);
 	private menuContainer:HallMenuContainer  = new HallMenuContainer(this.user,this);
@@ -30,13 +30,13 @@ class GameHall extends egret.DisplayObjectContainer{
 	}
 	 private menuOfflineModeClick(){
 		 console.log("menuOfflineModeClick---");
-		 let playerP2c:PlayerP2C = new PlayerP2C(this.user);
+		 let playerP2c:StandaloneModel = new StandaloneModel(this.user);
          this.parent.addChild(playerP2c);
 		 this.parent.removeChild(this);
 	 }
 	 private menuClassicModeClick(){
 		 console.log("menuClassicModeClick---");
-		 let player:PlayerP2P_Single = new PlayerP2P_Single(this.user);
+		 let player:ClassicModel = new ClassicModel(this.user);
          this.parent.addChild(player);
 		 this.parent.removeChild(this);
 	 }

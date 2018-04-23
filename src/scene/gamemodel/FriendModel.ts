@@ -1,4 +1,4 @@
-class PlayerP2P {
+class FriendModel {
 	public constructor() {
 	}
 }

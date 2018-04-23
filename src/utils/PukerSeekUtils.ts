@@ -238,7 +238,7 @@ class PukerSeekUtils {
 	private static seekStraightPairs(aHandPukerString:Array<Poker>,typeSort:number,length:number):Array<Poker>{
 		let seek :Array<Poker> = new Array<Poker>();
 		let result:Array<Poker> = new Array<Poker>();
-		for(let i = 0 ; i < aHandPukerString.length ; i ++){
+		for(let i = 0 ; i < aHandPukerString.length - 1 ; i ++){
 			if(aHandPukerString[i].getOrderValue() === aHandPukerString[i+1].getOrderValue() 
 				&& aHandPukerString[i].getOrderValue() > typeSort - length /2){
 				seek.push(aHandPukerString[i],aHandPukerString[i+1]);

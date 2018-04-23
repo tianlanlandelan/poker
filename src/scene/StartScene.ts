@@ -1,8 +1,8 @@
 class StartScene extends egret.DisplayObjectContainer{
-    private user:any;
+    private user:User;
     private sound:egret.Sound = RES.getRes("bg_guzheng_mp3");
     private soundChannel:egret.SoundChannel;
-	public constructor(user:any) {
+	public constructor(user:User) {
 		super();
         this.user = user;
         this.show();

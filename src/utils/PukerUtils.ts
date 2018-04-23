@@ -109,7 +109,6 @@ class PukerUtils {
             else return 0;    
     }
 
-
 	public static randomUsers:Array<any> = [
         {uid:"1001",name:"大可",sex:"man"},
         {uid:"1002",name:"Tiger",sex:"lady"},
@@ -138,8 +137,9 @@ class PukerUtils {
         {uid:"1025",name:"骏马啊你四条腿",sex:"man"}
         ];
 
-	public static getRandomUser():any{
-		return this.randomUsers[Math.floor(Math.random() * this.randomUsers.length)];
+	public static getRandomUser():User{
+		let user = this.randomUsers[Math.floor(Math.random() * this.randomUsers.length)];
+		return new User(user.uid,user.name,user.sex);
 	}
 	public static textTip:Array<string> = [
 		"不要","没你的大","要不起","你厉害","我认怂","你牛","过","GO","PASS","0.0"

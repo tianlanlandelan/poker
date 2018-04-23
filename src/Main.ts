@@ -130,7 +130,7 @@ class Main extends egret.DisplayObjectContainer{
     /**
      * 加载用户资料，在这里随机产生
      */
-   private user:any  = PukerUtils.randomUsers[Math.floor(Math.random() * PukerUtils.randomUsers.length)];
+   private user:User  = PukerUtils.getRandomUser();
 
     /**
      * 创建游戏场景

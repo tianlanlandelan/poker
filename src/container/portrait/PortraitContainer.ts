@@ -2,7 +2,7 @@
  * 用户头像显示容器
  */
 class PortraitContainer  extends egret.DisplayObjectContainer{
-	public constructor(user:any,index:number,isLandlord:boolean) {
+	public constructor(user:User,index:number,isLandlord:boolean) {
 		super();
 		let pc = RES.getRes("layout_json").portraitContainer;
 		
@@ -20,7 +20,7 @@ class PortraitContainer  extends egret.DisplayObjectContainer{
 		// this.addChild(bg);
 
 
-		let playerName:TextTip = new TextTip(user.name,0,100,16);
+		let playerName:TextTip = new TextTip(user.getName(),0,100,16);
 		playerName.width  = 100;
 		this.addChild(playerName);
 		if(isLandlord){
@@ -28,7 +28,7 @@ class PortraitContainer  extends egret.DisplayObjectContainer{
 			playerName.width  = 100;
 			this.addChild(playerName);
 		}
-		this.show(user.sex,index);
+		this.show(user.getSex(),index);
 	}
 
 	

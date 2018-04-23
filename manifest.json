@@ -10,7 +10,7 @@
 		"pomelo/bin/pomelo.js"
 	],
 	"game": [
-		"bin-debug/obj/DefaultPortrait.js",
+		"bin-debug/object/DefaultPortrait.js",
 		"bin-debug/common/socket/Socket.js",
 		"bin-debug/common/socket/SocketReceive.js",
 		"bin-debug/container/counter/OtherPukerCountContains.js",
@@ -34,12 +34,12 @@
 		"bin-debug/container/timer/TimerContainer.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
-		"bin-debug/obj/Button.js",
+		"bin-debug/object/Button.js",
 		"bin-debug/common/socket/SocketMiddWare.js",
-		"bin-debug/obj/HallMenus.js",
-		"bin-debug/obj/Layout.js",
-		"bin-debug/obj/Puker.js",
-		"bin-debug/obj/TextTip.js",
+		"bin-debug/object/HallMenus.js",
+		"bin-debug/object/Layout.js",
+		"bin-debug/object/Puker.js",
+		"bin-debug/object/TextTip.js",
 		"bin-debug/scene/GameHall.js",
 		"bin-debug/scene/PlayerP2C.js",
 		"bin-debug/scene/PlayerP2P_Single.js",
@@ -59,6 +59,7 @@
 		"bin-debug/utils/PukerType.js",
 		"bin-debug/utils/PukerTypeUtils.js",
 		"bin-debug/utils/PukerUtils.js",
-		"bin-debug/utils/RoomManager.js"
+		"bin-debug/utils/RoomManager.js",
+		"bin-debug/utils/User.js"
 	]
 }

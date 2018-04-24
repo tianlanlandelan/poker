@@ -1,9 +1,0 @@
-{
-    "useClip": true,
-    "maxImageWidth": 2048,
-    "maxImageHeight": 2048,
-    "defaultResPath": "d:\\EgretProjects\\helloworld\\resource\\default.res.json",
-    "packGroups": {
-        "preload": true
-    }
-}

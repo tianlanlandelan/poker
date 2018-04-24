@@ -25,11 +25,11 @@
 <body>
     <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
          data-entry-class="Main"
-         data-orientation="auto"
-         data-scale-mode="fixedWidth"
+         data-orientation="portrait"
+         data-scale-mode="showAll"
          data-frame-rate="30"
-         data-content-width="640"
-         data-content-height="1136"
+         data-content-width="1920"
+         data-content-height="1080"
          data-show-paint-rect="false"
          data-multi-fingered="2"
          data-show-fps="false" data-show-log="false"
@@ -72,13 +72,21 @@
         loadScript(list, function () {
             /**
              * {
-             * "renderMode":, //引擎渲染模式，"canvas" 或者 "webgl"
-             * "audioType": 0 //使用的音频类型，0:默认，2:web audio，3:audio
-             * "antialias": //WebGL模式下是否开启抗锯齿，true:开启，false:关闭，默认为false
-             * "retina": //是否基于devicePixelRatio缩放画布
+             * "renderMode":, //Engine rendering mode, "canvas" or "webgl"
+             * "audioType": 0 //Use the audio type, 0: default, 2: web audio, 3: audio
+             * "antialias": //Whether the anti-aliasing is enabled in WebGL mode, true: on, false: off, defaults to false
+             * "calculateCanvasScaleFactor": //a function return canvas scale factor
              * }
              **/
-            egret.runEgret({ renderMode: "webgl", audioType: 0 });
+            egret.runEgret({ renderMode: "webgl", audioType: 0, calculateCanvasScaleFactor:function(context) {
+                var backingStore = context.backingStorePixelRatio ||
+                    context.webkitBackingStorePixelRatio ||
+                    context.mozBackingStorePixelRatio ||
+                    context.msBackingStorePixelRatio ||
+                    context.oBackingStorePixelRatio ||
+                    context.backingStorePixelRatio || 1;
+                return (window.devicePixelRatio || 1) / backingStore;
+            }});
         });
     });
     xhr.send(null);

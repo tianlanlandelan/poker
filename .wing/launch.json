@@ -11,7 +11,7 @@
 			"sourceMaps": true,
 			"webRoot": "${workspaceRoot}",
 			"preLaunchTask":"build",
-			"port":5826
+			"port":5080
 		},
 		{
 			"name": "Launch Chrome",
@@ -23,7 +23,7 @@
 			"webRoot": "${workspaceRoot}",
 			"preLaunchTask":"build",
 			"userDataDir":"${tmpdir}",
-			"port":5826
+			"port":5080
 		}
 	]
 }

@@ -1,9 +1,0 @@
-{
-    "useClip": false,
-    "maxImageWidth": 4096,
-    "maxImageHeight": 4096,
-    "defaultResPath": "e:\\EgretProjects\\poker\\resource\\default.res.json",
-    "packGroups": {
-        "preload": true
-    }
-}

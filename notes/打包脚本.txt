@@ -2,4 +2,4 @@
 
 
 
-egret create_app D:\AndroidProject\poker -f D:\EgretProjects\poker -t D:\egret-android-support-5.0.3\egret-android-support-5.0.3
+egret create_app D:\EgretProjects\poker_android -f D:\EgretProjects\poker -t D:\Egret\egret-android-support-5.0.12\egret-android-support-as-5.0.12

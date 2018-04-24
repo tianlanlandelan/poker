@@ -1,6 +1,5 @@
 /bin-debug/
 /bin-release/
 /.git-credentials
-/egretProperties.json
 /manifest.json
 /libs/

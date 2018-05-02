@@ -1,9 +1,30 @@
 {
 	"groups": [
-		{
-			"keys": "bg_jpg,egret_icon_png,description_json,layout_json,defaultPortrait_1_jpg,defaultPortrait_2_jpg,defaultPortrait_12_jpg,defaultPortrait_22_jpg,button_pass_png,button_none_png,button_ok_png,button_none2_png,button_ok2_png,button_pass2_png,button_tip_png,button_call_png,button_nocall_png,button_begin_png,button_leaveRoom_png,button_newGame_png,puker_json,1_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,10_png,11_png,12_png,13_png,14_png,15_png,16_png,17_png,18_png,19_png,20_png,21_png,22_png,23_png,24_png,26_png,27_png,28_png,29_png,30_png,31_png,32_png,33_png,34_png,35_png,36_png,25_png,startBgImg_png,50_png,51_png,52_png,53_png,54_png,37_png,38_png,39_png,40_png,41_png,42_png,43_png,44_png,45_png,46_png,47_png,48_png,49_png,puker_deal_mp3,bg_guzheng_mp3,gameBgImg_png,lady_7_png,lady_8_png,lady_9_png,lady_10_png,lady_1_png,lady_2_png,lady_3_png,lady_4_png,lady_5_png,lady_6_png,man_6_png,man_7_png,man_8_png,man_9_png,man_10_png,man_1_png,man_2_png,man_3_png,man_4_png,man_5_png,menu_friends_png,menu_home_png,menu_messages_png,menu_offlineMode_png,menu_package_png,menu_pet_png,menu_setting_png,menu_shop_png,menu_activity_png,menu_classicMode_png,menu_customerServer_png,menu_friendMode_png,shop_button_add_png,shop_button_subtract_png,shop_egg_png,shop_milk_png,shop_nest_png,shop_ssb_png,currency_copper_png,currency_shell_png,shop_bgImg_png,shop_button_buy_png,shop_input_bgImg_png,shop_name_bgImg_png",
-			"name": "preload"
-		}
+			{
+				"name": "preload",
+				"keys": "bg_jpg,egret_icon_png,description_json,layout_json,puker_json,puker_deal_mp3,bg_guzheng_mp3,gameBgImg_png,startBgImg_png,button_begin_png"
+			},
+			{
+				"name": "pokers",
+				"keys": "1_png,2_png,3_png,4_png,5_png,6_png,7_png,8_png,9_png,10_png,11_png,12_png,13_png,14_png,15_png,16_png,17_png,18_png,19_png,20_png,21_png,22_png,23_png,24_png,25_png,26_png,27_png,28_png,29_png,30_png,31_png,32_png,33_png,34_png,35_png,36_png,37_png,38_png,39_png,40_png,41_png,42_png,43_png,44_png,45_png,46_png,47_png,48_png,49_png,50_png,51_png,52_png,53_png,54_png"
+			},
+			{
+				"name": "portraits",
+				"keys": "defaultPortrait_1_jpg,defaultPortrait_2_jpg,lady_1_png,lady_2_png,lady_3_png,lady_4_png,lady_5_png,lady_6_png,lady_7_png,lady_8_png,lady_9_png,lady_10_png,man_1_png,man_2_png,man_3_png,man_4_png,man_5_png,man_6_png,man_7_png,man_8_png,man_9_png,man_10_png"
+			},
+			{
+				"name": "menus",
+				"keys": "menu_friends_png,menu_home_png,menu_messages_png,menu_offlineMode_png,menu_package_png,menu_pet_png,menu_setting_png,menu_shop_png,menu_activity_png,menu_classicMode_png,menu_customerServer_png,menu_friendMode_png"
+			},
+			{
+				"name": "buttons",
+				"keys": "button_pass_png,button_none_png,button_ok_png,button_none2_png,button_ok2_png,button_pass2_png,button_tip_png,button_call_png,button_nocall_png,button_leaveRoom_png,button_newGame_png"
+			},
+			{
+				"name": "shops",
+				"keys": "shop_button_add_png,shop_button_subtract_png,shop_egg_png,shop_milk_png,shop_nest_png,shop_ssb_png,currency_copper_png,currency_shell_png,shop_bgImg_png,shop_button_buy_png,shop_input_bgImg_png,shop_name_bgImg_png"
+			}
+		
 	],
 	"resources": [
 		{

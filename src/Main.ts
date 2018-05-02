@@ -77,7 +77,9 @@ class Main extends egret.DisplayObjectContainer {
             const loadingView = new LoadingUI();
             this.stage.addChild(loadingView);
             await RES.loadConfig("resource/default.res.json", "resource/");
-            await RES.loadGroup("preload", 0, loadingView);
+            await RES.loadGroup("preload", 1, loadingView);
+            RES.loadGroup("menus", 0);
+        
             this.stage.removeChild(loadingView);
         }
         catch (e) {

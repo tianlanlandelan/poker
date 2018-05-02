@@ -1,6 +1,6 @@
 {
-  "engineVersion": "5.1.10",
-  "compilerVersion": "5.1.10",
+  "engineVersion": "5.1.9",
+  "compilerVersion": "5.1.9",
   "template": {},
   "target": {
     "current": "web"
@@ -43,11 +43,11 @@
   "targets": {
     "android": {
       "appname": "poker",
-      "packagename": "com.atomic.long"
+      "packagename": "com.atomic.poker"
     },
     "ios": {
-      "appname": "uiui",
-      "packagename": "com.companyname"
+      "appname": "poker",
+      "packagename": "com.atomic.long"
     }
   }
 }

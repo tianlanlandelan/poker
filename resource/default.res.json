@@ -2,7 +2,7 @@
 	"groups": [
 			{
 				"name": "preload",
-				"keys": "bg_jpg,egret_icon_png,description_json,layout_json,puker_json,puker_deal_mp3,bg_guzheng_mp3,gameBgImg_png,startBgImg_png,button_begin_png"
+				"keys": "bg_jpg,egret_icon_png,description_json,layout_json,puker_json,puker_deal_mp3,gameBgImg_png,startBgImg_png,button_begin_png"
 			},
 			{
 				"name": "pokers",
@@ -315,7 +315,7 @@
 		{
 			"name": "startBgImg_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/bgImg/startBgImg.png"
+			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/bgImg/startBgImg.jpg"
 		},
 		{
 			"name": "50_png",
@@ -420,7 +420,7 @@
 		{
 			"name": "gameBgImg_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/bgImg/gameBgImg.png"
+			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/bgImg/gameBgImg.jpg"
 		},
 		{
 			"name": "lady_7_png",

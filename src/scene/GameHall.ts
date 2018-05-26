@@ -13,10 +13,14 @@ class GameHall extends egret.DisplayObjectContainer{
 		this.addChild(bg);
 		this.show();
 
-		RES.loadGroup("buttons", 4);
+        RES.loadGroup("portraits", 4);
+		console.log("portraits load ok");
         RES.loadGroup("pokers", 3);
-        RES.loadGroup("portraits", 2);
+		console.log("pokers load ok");
+		RES.loadGroup("buttons", 2);
+		console.log("buttons load ok");
         RES.loadGroup("shops", 1);
+		console.log("shops load ok");
 
 	}
 	private user:User;

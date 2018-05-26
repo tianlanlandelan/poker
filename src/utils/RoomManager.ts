@@ -20,6 +20,11 @@ class RoomManager {
     public static  Request_Discard = 1004;
 
     /**
+     * Server返回Socket连接成功建立
+     */
+    public static Response_SocketCreateOK = 2000;
+
+    /**
      * Server返回房间和房间里的其他玩家信息
      */
     public static  Response_RoomInfo = 2001;

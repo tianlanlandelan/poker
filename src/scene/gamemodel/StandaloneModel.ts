@@ -82,9 +82,8 @@ class StandaloneModel extends egret.DisplayObjectContainer {
     private user: User;
 
     // private sound:egret.Sound = RES.getRes("puker_deal_mp3");
-    private sound: egret.Sound = RES.getRes("bg_guzheng_mp3");
 
-    private soundChannel: egret.SoundChannel;
+    // private soundChannel: egret.SoundChannel;
 	/**
 	 * 单机游戏场景
 	 */
@@ -116,11 +115,11 @@ class StandaloneModel extends egret.DisplayObjectContainer {
         let index: number = 17;
         let pukers: Array<Poker> = new Array<Poker>();
         let i: number = 0;
-        this.soundChannel = this.sound.play(0, 1);
-        this.soundChannel.volume = 0.5;
+        // this.soundChannel = this.sound.play(0, 1);
+        // this.soundChannel.volume = 0.5;
         this.createTimer(300, index,
             () => {
-                this.soundChannel.stop();
+                // this.soundChannel.stop();
                 console.log("发牌：", i);
 
                 pukers.push(this.pukers1[i]);
@@ -132,13 +131,13 @@ class StandaloneModel extends egret.DisplayObjectContainer {
                 this.showCount(2, i + 1);
                 this.showCount(3, i + 1);
                 i++;
-                this.soundChannel = this.sound.play(0, 1);
+                // this.soundChannel = this.sound.play(0, 1);
             },
             () => {
                 console.log("发牌结束");
                 /** 显示叫地主按钮 */
                 this.showButtons(RoomManager.ButtonsCallTheLandlord);
-                this.soundChannel.stop();
+                // this.soundChannel.stop();
             }
         );
 

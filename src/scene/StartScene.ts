@@ -1,22 +1,23 @@
 class StartScene extends egret.DisplayObjectContainer{
     private user:User;
-    private sound:egret.Sound = RES.getRes("bg_guzheng_mp3");
-    private soundChannel:egret.SoundChannel;
+    // private sound:egret.Sound = RES.getRes("bg_guzheng_mp3");
+    // private soundChannel:egret.SoundChannel;
 	public constructor(user:User) {
 		super();
         this.user = user;
         this.show();
 	}
 	private show(){
-		let layout = RES.getRes("layout_json").layout;
-        this.soundChannel = this.sound.play();
-        this.soundChannel.volume = 0.3;
+        //微信版和网页版暂时去掉启动界面的背景音乐，减少启动时的加载时间
+		// let layout = RES.getRes("layout_json").layout;
+        // this.soundChannel = this.sound.play();
+        // this.soundChannel.volume = 0.3;
 
         //加载游戏背景图
         let bg:egret.Bitmap = new egret.Bitmap(RES.getRes("startBgImg_png"));
         bg.name = "bgImg";
         this.addChild(bg);
-
+        
         //加载开始按钮
         let button:egret.Bitmap = new egret.Bitmap(RES.getRes("button_begin_png"));
         button.touchEnabled = true;
@@ -31,7 +32,7 @@ class StartScene extends egret.DisplayObjectContainer{
      * 点击开始游戏按钮,移除开始界面，进入游戏大厅
      */
     private startGame(evt:egret.TouchEvent):void{
-        this.soundChannel.stop();
+        // this.soundChannel.stop();
         let gameHall:GameHall = new GameHall(this.user);
         gameHall.name = "gameHall";
         this.parent.addChild(gameHall);

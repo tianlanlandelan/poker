@@ -16,7 +16,6 @@ class ClassicModel extends egret.DisplayObjectContainer{
 	public  constructor(user:User) {
 		super();
         this.user = user;
-		
         this.layout = RES.getRes("layout_json").layout;
 		let sky:Layout = new Layout(this.layout.stageWidth,this.layout.stageHeight);
         this.addChild(sky);
@@ -28,15 +27,17 @@ class ClassicModel extends egret.DisplayObjectContainer{
 		this.addChild(tip);	
 
         this.show();
-        console.log("进入游戏房间");
-        // this.init("ws://127.0.0.1:8080/pokerWebSocket",this.user.getName());
+        
         
 	}
     /**
      * 显示游戏场景
      */
-    private show(){   
-        this.test();   
+    private show(){  
+        console.log("进入游戏房间");
+        this.init("ws://127.0.0.1:8080/pokerWebSocket",this.user.getName()); 
+        
+        // this.test();   
     }
     private test() {
         let index = 10;
@@ -109,7 +110,8 @@ class ClassicModel extends egret.DisplayObjectContainer{
         this.webSocket.connectByUrl(url + "/" + userName); 
     }
     public  send(data:any):void{
-        this.webSocket.writeUTF(this.UUID + JSON.stringify(data));
+        this.webSocket.writeUTF(JSON.stringify(data));
+        console.log("消息发送成功",JSON.stringify(data));
     }
     private  onReceiveData(e:egret.Event):void{
         let response:string = this.webSocket.readUTF();
@@ -118,23 +120,47 @@ class ClassicModel extends egret.DisplayObjectContainer{
             return;
         }
         let res:any = JSON.parse(response);
-        if(res.code == RoomManager.Response_RoomInfo){
+        switch(res.code){
+            case RoomManager.Response_RoomInfo:{
+                console.log("进入游戏房间成功","房间号",res.data.roomId);
+                let request:any = new Object;
+                let body:any = new Object;
+                request.code = RoomManager.Request_BeReady;
+                body.roomId = res.data.roomId;
+                body.message = "其实我也不知道";
+                request.data = body;
+                this.send(request);
+            } break;
+            case RoomManager.Response_Reday:{
 
-        }else if(res.code == RoomManager.Response_Reday){
+            }  break;
+            case RoomManager.Response_DealPoker:{
 
-        }else if(res.code == RoomManager.Response_DealPoker){
+            }  break;
+            case RoomManager.Response_ToCallTheLandlord:{
 
-        }else if(res.code == RoomManager.Response_ToCallTheLandlord){
+            }  break;
+            case RoomManager.Response_LandlordAndLastCard:{
 
-        }else if(res.code == RoomManager.Response_LandlordAndLastCard){
+            }  break;
+            case RoomManager.Response_Discard:{
 
-        }else if(res.code == RoomManager.Response_Discard){
-            
-        }
-        // console.log("onReceiveData:",res.code,res.data);
+            }  break;
+            default :{
+                console.log("onReceiveData:",res.code,res.data);
+            } break;
+
+        }  
     }
     private  onConnected():void{
-        console.log('webSocket','connect success');
+        console.log("成功连接到服务器-------------");
+                let request:any = new Object;
+                let body:any = new Object;
+                request.code = RoomManager.Request_onRoom;
+                body.userId = "abcdefg";
+                body.userName = this.user.getName();
+                request.data = body;
+                this.send(request);
     }
 
     private  onConnectClose():void{

@@ -37,12 +37,10 @@ class PortraitOtherContainer extends egret.DisplayObjectContainer{
 			this.addChild(playerName);
 		}
 		this.show(user,index);
-    
 	}
 	
-  	private show(user:User,index:number){
-		  
-		  let portrait:DefaultPortrait = new DefaultPortrait(user.getSex(),index,0,0,100,100);
+  	private show(user:User,index:number){  
+		let portrait:DefaultPortrait = new DefaultPortrait(user.getSex(),index,0,0,100,100);
 		this.addChild(portrait);
 	}
 }

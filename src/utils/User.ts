@@ -1,14 +1,15 @@
 class User {
-    public constructor(id:number,name:string,sex:string){
-        this.id = id;
+    public constructor(name:string,sex:string){
         this.name = name;
         this.sex = sex;
     }
-    private id:number;
+    private id:string;
     private name:string;
     private sex:string;
+    private seat:number = 1;
 
-    public getId():number{
+
+    public getId():string{
         return this.id;
     }
     public getName():string{
@@ -16,5 +17,17 @@ class User {
     }
     public getSex():string{
         return this.sex;
+    }
+    public getSeat():number{
+        return this.seat;
+    }
+    public setSeat(seat:number){
+        this.seat = seat;
+    }
+    public setId(id:string){
+        this.id = id;
+    }
+    public setName(name:string){
+        this.name = name;
     }
 }

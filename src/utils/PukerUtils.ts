@@ -139,7 +139,7 @@ class PukerUtils {
 
 	public static getRandomUser():User{
 		let user = this.randomUsers[Math.floor(Math.random() * this.randomUsers.length)];
-		return new User(user.uid,user.name,user.sex);
+		return new User(user.name,user.sex);
 	}
 	public static textTip:Array<string> = [
 		"不要","没你的大","要不起","你厉害","我认怂","你牛","过","GO","PASS","0.0"

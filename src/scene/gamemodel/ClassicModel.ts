@@ -2,11 +2,34 @@ class ClassicModel extends egret.DisplayObjectContainer{
 
 	private layout;
     private user:User;
-    private mySeat:number;
     private webSocket:egret.WebSocket;
 
-    private portrait:PortraitContainer;
+    private portrait:PortraitContainer;//玩家头像
+    private portraitLeft: PortraitOtherContainer;//上家头像
+    private portraitRight: PortraitOtherContainer;//下家头像
 
+    private pokerContainer: PukerContainer;
+    private publicPokerContainer: BottomContainer;
+
+    private poc1Index: number = Math.floor(Math.random() * 10) + 1;
+    private poc2Index: number = Math.floor(Math.random() * 10) + 1;
+    private poc3Index: number = Math.floor(Math.random() * 10) + 1;
+
+    private leftPlayer: User = PukerUtils.getRandomUser();
+    private rightPlayer: User = PukerUtils.getRandomUser();
+
+    /**
+     * 玩家的牌
+     */
+    private pokers:Array<Poker> = new Array<Poker>();
+    /**
+     * 当前房间出的牌
+     */
+    private activityPokers:Array<Poker> = new Array<Poker>();
+    /**
+     * 底牌
+     */
+    private publicPokers:Array<Poker> = new Array<Poker>();
     public  UUID:string ;
 
 	/**
@@ -36,64 +59,7 @@ class ClassicModel extends egret.DisplayObjectContainer{
     private show(){  
         console.log("进入游戏房间");
         this.init("ws://127.0.0.1:8080/pokerWebSocket",this.user.getName()); 
-        
-        // this.test();   
-    }
-    private test() {
-        let index = 10;
-        this.createTimer(1000, index,
-            () => {
-                switch(index){
-                    case 10: {
-                        console.log(index,"玩家进入房间，显示玩家信息");
-                        this.showPortrait(false);
-                    };break;
-                    case 9:{
-                        console.log(index,"显示房间信息，此时没有其他玩家，显示默认等待界面");
-                    };break;
-                    case 8:{
-                        console.log(index,"有其他玩家加入，显示其他玩家信息");
-                    };break;
-                    case 7:{
-                        console.log(index,"房间人满，显示开始前的倒计时");
-                    };break;
-                    case 6:{
-                        console.log(index,"游戏开始，绘制自己的牌");
-                    };break;
-                    case 5:{
-                        console.log(index,"绘制其他玩家的牌和底牌");
-                    };break;
-                    case 4:{
-                        console.log(index,"显示叫地主按钮组");
-                    };break;
-                    case 3:{
-                        console.log(index,"显示抢地主按钮组");
-                    };break;
-                    case 2:{
-                        console.log(index,"显示出牌按钮组");
-                    };break;
-                    case 1:{
-                        console.log(index,"绘制自己出的牌和其他玩家出的牌");
-                    };break;
-                }
-
-                index-- ;
-            },
-            () => { console.log("计时结束") })
-    }
-
-    //清理玩家头像
-    private clearPortrait() {
-        if (this.getChildByName("portrait") != null) {
-            this.removeChild(this.getChildByName("portrait"));
-        }
-    }
-    //显示玩家头像
-    private showPortrait(isLandlord: boolean) {
-        this.clearPortrait();
-        this.portrait = new PortraitContainer(this.user, 7, isLandlord);
-        this.portrait.name = "portrait";
-        this.addChild(this.portrait);
+        this.showPortrait(false);
     }
 
     private init(url:string,userName:string):void{
@@ -121,20 +87,75 @@ class ClassicModel extends egret.DisplayObjectContainer{
         }
         let res:any = JSON.parse(response);
         switch(res.code){
+            case RoomManager.Response_InitUserOK:{
+                console.log("用户初始化完成","用户Id",res.data.userId);
+                this.user.setId(res.data.userId);
+                let request:any = new Object;
+                let body:any = new Object;
+                request.code = RoomManager.Request_onRoom;
+                body.userId = this.user.getId();
+                body.userName = this.user.getName();
+                request.data = body;
+                this.send(request);
+            } break;
             case RoomManager.Response_RoomInfo:{
                 console.log("进入游戏房间成功","房间号",res.data.roomId);
+                let  players:Array<any> = res.data.players;
+                for(let i = 0 ; i < players.length ; i ++){
+                    //存储自己的数据
+                    if(players[i].id == this.user.getId()){
+                        this.user.setSeat(players[i].seat);
+                    }else{//保存其他玩家的数据
+                        if(this.isLeft(players[i].seat)){
+                            this.leftPlayer.setSeat(players[i].seat);
+                            this.leftPlayer.setName(players[i].name);
+                        }else{
+                            this.rightPlayer.setSeat(players[i].seat);
+                            this.rightPlayer.setName(players[i].name);
+                        }
+                         this.showOtherPortrait(players[i].seat,false);
+                    }
+                }
+
+            } break;
+            case RoomManager.Response_NewPlayerJoin:{
+                console.log("有新玩家加入",res.data.player);
+                let player = res.data.player;
+                if(this.isLeft(player.seat)){
+                    this.leftPlayer.setSeat(player.seat);
+                    this.leftPlayer.setName(player.name);
+                }else{
+                    this.rightPlayer.setSeat(player.seat);
+                    this.rightPlayer.setName(player.name);
+                }
+                this.showOtherPortrait(player.seat,false);
+            }  break;
+            case RoomManager.Response_Reday:{
+                console.log("房间人满，准备开始游戏------------","房间号",res.data.roomId);
                 let request:any = new Object;
                 let body:any = new Object;
                 request.code = RoomManager.Request_BeReady;
                 body.roomId = res.data.roomId;
-                body.message = "其实我也不知道";
+                body.userId = this.user.getId();
                 request.data = body;
                 this.send(request);
-            } break;
-            case RoomManager.Response_Reday:{
-
             }  break;
             case RoomManager.Response_DealPoker:{
+                console.log("------------发牌---------------");
+                console.log("我的牌",res.data.pokers);
+                console.log("底牌",res.data.publicPokers);
+                let list:Array<any> = res.data.pokers;
+                for(let i = 0 ; i < list.length ; i ++){
+                    this.pokers.push(new Poker(list[i].id,list[i].sort));
+                }
+                this.showPokers();
+                let publicPokers:Array<any> = res.data.publicPokers;
+                for(let i = 0 ; i < publicPokers.length ; i ++){
+                    this.publicPokers.push(new Poker(publicPokers[i].id,publicPokers[i].sort));
+                }
+                //TODO 显示自己的牌和底牌
+                
+                
 
             }  break;
             case RoomManager.Response_ToCallTheLandlord:{
@@ -154,13 +175,7 @@ class ClassicModel extends egret.DisplayObjectContainer{
     }
     private  onConnected():void{
         console.log("成功连接到服务器-------------");
-                let request:any = new Object;
-                let body:any = new Object;
-                request.code = RoomManager.Request_onRoom;
-                body.userId = "abcdefg";
-                body.userName = this.user.getName();
-                request.data = body;
-                this.send(request);
+               
     }
 
     private  onConnectClose():void{
@@ -170,17 +185,88 @@ class ClassicModel extends egret.DisplayObjectContainer{
     private  onIOError():void{
         console.log('webSocket','IO Error');
     }
-  
+    
+    private showPokers() {
+        let index: number = this.pokers.length;
+        let i: number = 0;
+        let pokers:Array<Poker> = new Array<Poker>();
+        this.createTimer(300, index,
+            () => {
+                console.log("发牌：", i);
+                pokers.push(this.pokers[i]);
+                this.clearPokers();
+                this.pokerContainer = new PukerContainer(this, pokers);
+                this.pokerContainer.name = "pokerContainer";
+                this.addChild(this.pokerContainer);
 
+                // this.showCount(2, i + 1);
+                // this.showCount(3, i + 1);
+                i++;
+                // this.soundChannel = this.sound.play(0, 1);
+            },
+            () => {
+                console.log("发牌结束");
+                /** 显示叫地主按钮 */
+                // this.showButtons(RoomManager.ButtonsCallTheLandlord);
+                // this.soundChannel.stop();
+            }
+        );
+
+    }
+
+    private clearPokers() {
+        if (this.getChildByName("pokerContainer") != null) {
+            this.removeChild(this.getChildByName("pokerContainer"));
+        }
+    }
+    /**
+     * 清理玩家头像
+     */
+    private clearPortrait() {
+        if (this.getChildByName("portrait") != null) {
+            this.removeChild(this.getChildByName("portrait"));
+        }
+    }
+    /**
+     * 显示玩家头像
+     */
+    private showPortrait(isLandlord: boolean) {
+        this.clearPortrait();
+        this.portrait = new PortraitContainer(this.user, 7, isLandlord);
+        this.portrait.name = "portrait";
+        this.addChild(this.portrait);
+    }
+    private clearOtherPortrait(seat: number) {
+        let name :string;
+        if(this.isLeft(seat)){
+            name = "portraitLeft";
+        }else{
+            name = "portraitRight";
+        }
+        if (this.getChildByName(name) != null) {
+            this.removeChild(this.getChildByName(name));
+        }
+    }
+
+    private showOtherPortrait(seat: number, isLandlord: boolean) {
+        this.clearOtherPortrait(seat);
+        if(this.isLeft(seat)){
+            this.portraitLeft = new PortraitOtherContainer(this.leftPlayer, this.poc3Index, this.isLeft(seat), isLandlord);
+            this.portraitLeft.name = "portraitLeft";
+            this.addChild(this.portraitLeft);
+        }else{
+            this.portraitRight = new PortraitOtherContainer(this.rightPlayer, this.poc3Index, this.isLeft(seat), isLandlord);
+            this.portraitRight.name = "portraitRight";
+            this.addChild(this.portraitRight);
+        }
+    }
     /**
      * 是否是上家
      */
     private isLeft(seat:number){
-        if(this.mySeat == 1 && seat == 3) return true;
-        if(this.mySeat == 2 && seat == 1) return true;
-        if(this.mySeat == 3 && seat == 2) return true;
-        return false;
-        
+        if(seat == this.user.getSeat() + 1 || seat == this.user.getSeat() % 3 + 1)
+            return false;
+        return true;
     }
     private createTimer(delay: number, times: number, timerRun = (times: number) => { }, timerEnd = () => { }) {
         var timer: egret.Timer = new egret.Timer(delay, times);
@@ -200,7 +286,28 @@ class ClassicModel extends egret.DisplayObjectContainer{
         this.parent.addChild(gameHall);
         this.parent.removeChild(this);
     }
+    
+    public pukerClick(evt: egret.TouchEvent): void {
 
+        // let p = RES.getRes("layout_json").puker;
+        // let y = p.pukerUpMove;
+        // let draggedObject: egret.Bitmap = evt.currentTarget;
+        // //显示扑克的y坐标和扑克的名称
+        // let id: number = parseInt(draggedObject.name.split(",")[0]);
+        // let orderValue: number = parseInt(draggedObject.name.split(",")[1]);
+        // if (draggedObject.y == y) {//选中牌，将牌加入数组
+        //     draggedObject.y = 0;
+        //     this.pukerSelectArray.push(new Poker(id, orderValue));
+
+        // } else {//取消选中牌，将牌从数组中移除
+        //     draggedObject.y = y;
+        //     let poker = new Poker(id, orderValue);
+        //     console.log("poker", poker.toString(), "array", this.pukerSelectArray);
+
+        //     this.pukerSelectArray = PukerUtils.removePokers(this.pukerSelectArray, [poker]);
+        //     console.log("removedArray", this.pukerSelectArray)
+        // }
+    }
   
 
 }

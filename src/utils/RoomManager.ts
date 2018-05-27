@@ -22,12 +22,16 @@ class RoomManager {
     /**
      * Server返回Socket连接成功建立
      */
-    public static Response_SocketCreateOK = 2000;
+    public static Response_InitUserOK = 2000;
 
     /**
      * Server返回房间和房间里的其他玩家信息
      */
     public static  Response_RoomInfo = 2001;
+    /**
+     * Server通知有新玩家加入
+     */
+    public static  Response_NewPlayerJoin = 20011;
     /**
      * Server通知客户端准备
      */

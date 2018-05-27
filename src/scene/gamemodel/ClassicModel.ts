@@ -9,7 +9,7 @@ class ClassicModel extends egret.DisplayObjectContainer{
     private portraitRight: PortraitOtherContainer;//下家头像
 
     private pokerContainer: PukerContainer;
-    private publicPokerContainer: BottomContainer;
+    private publicPokerContainer: PukerBottomContainer;
 
     private poc1Index: number = Math.floor(Math.random() * 10) + 1;
     private poc2Index: number = Math.floor(Math.random() * 10) + 1;
@@ -30,6 +30,8 @@ class ClassicModel extends egret.DisplayObjectContainer{
      * 底牌
      */
     private publicPokers:Array<Poker> = new Array<Poker>();
+
+    private selectedPokers:Array<Poker> = new Array<Poker>();
     public  UUID:string ;
 
 	/**
@@ -148,15 +150,12 @@ class ClassicModel extends egret.DisplayObjectContainer{
                 for(let i = 0 ; i < list.length ; i ++){
                     this.pokers.push(new Poker(list[i].id,list[i].sort));
                 }
+                //显示自己的牌
                 this.showPokers();
                 let publicPokers:Array<any> = res.data.publicPokers;
                 for(let i = 0 ; i < publicPokers.length ; i ++){
                     this.publicPokers.push(new Poker(publicPokers[i].id,publicPokers[i].sort));
                 }
-                //TODO 显示自己的牌和底牌
-                
-                
-
             }  break;
             case RoomManager.Response_ToCallTheLandlord:{
 
@@ -186,6 +185,13 @@ class ClassicModel extends egret.DisplayObjectContainer{
         console.log('webSocket','IO Error');
     }
     
+    private showPublicPokers(){
+        /** 显示底牌 */
+        this.publicPokerContainer = new PukerBottomContainer(this.publicPokers);
+        this.publicPokerContainer.name = "publicPokerContainer";
+        this.addChild(this.publicPokerContainer);
+    }
+
     private showPokers() {
         let index: number = this.pokers.length;
         let i: number = 0;
@@ -206,6 +212,8 @@ class ClassicModel extends egret.DisplayObjectContainer{
             },
             () => {
                 console.log("发牌结束");
+                //显示底牌
+                this.showPublicPokers();
                 /** 显示叫地主按钮 */
                 // this.showButtons(RoomManager.ButtonsCallTheLandlord);
                 // this.soundChannel.stop();
@@ -289,24 +297,24 @@ class ClassicModel extends egret.DisplayObjectContainer{
     
     public pukerClick(evt: egret.TouchEvent): void {
 
-        // let p = RES.getRes("layout_json").puker;
-        // let y = p.pukerUpMove;
-        // let draggedObject: egret.Bitmap = evt.currentTarget;
-        // //显示扑克的y坐标和扑克的名称
-        // let id: number = parseInt(draggedObject.name.split(",")[0]);
-        // let orderValue: number = parseInt(draggedObject.name.split(",")[1]);
-        // if (draggedObject.y == y) {//选中牌，将牌加入数组
-        //     draggedObject.y = 0;
-        //     this.pukerSelectArray.push(new Poker(id, orderValue));
+        let p = RES.getRes("layout_json").puker;
+        let y = p.pukerUpMove;
+        let draggedObject: egret.Bitmap = evt.currentTarget;
+        //显示扑克的y坐标和扑克的名称
+        let id: number = parseInt(draggedObject.name.split(",")[0]);
+        let orderValue: number = parseInt(draggedObject.name.split(",")[1]);
+        if (draggedObject.y == y) {//选中牌，将牌加入数组
+            draggedObject.y = 0;
+            this.selectedPokers.push(new Poker(id, orderValue));
 
-        // } else {//取消选中牌，将牌从数组中移除
-        //     draggedObject.y = y;
-        //     let poker = new Poker(id, orderValue);
-        //     console.log("poker", poker.toString(), "array", this.pukerSelectArray);
+        } else {//取消选中牌，将牌从数组中移除
+            draggedObject.y = y;
+            let poker = new Poker(id, orderValue);
+            console.log("poker", poker.toString(), "array", this.selectedPokers);
 
-        //     this.pukerSelectArray = PukerUtils.removePokers(this.pukerSelectArray, [poker]);
-        //     console.log("removedArray", this.pukerSelectArray)
-        // }
+            this.selectedPokers = PukerUtils.removePokers(this.selectedPokers, [poker]);
+            console.log("removedArray", this.selectedPokers)
+        }
     }
   
 

@@ -103,11 +103,16 @@ class ClassicModel extends egret.DisplayObjectContainer{
             case RoomManager.Response_RoomInfo:{
                 console.log("进入游戏房间成功","房间号",res.data.roomId);
                 let  players:Array<any> = res.data.players;
+                //因为其他玩家的座位显示是根据自己的座位显示的为上家和下家的，因此需要先取出玩家自己的数据再取出其他玩家数据
                 for(let i = 0 ; i < players.length ; i ++){
                     //存储自己的数据
                     if(players[i].id == this.user.getId()){
                         this.user.setSeat(players[i].seat);
-                    }else{//保存其他玩家的数据
+                    }
+                }
+                for(let i = 0 ; i < players.length ; i ++){
+                    //保存其他玩家的数据
+                    if(players[i].id != this.user.getId()){
                         if(this.isLeft(players[i].seat)){
                             this.leftPlayer.setSeat(players[i].seat);
                             this.leftPlayer.setName(players[i].name);
@@ -145,23 +150,40 @@ class ClassicModel extends egret.DisplayObjectContainer{
             case RoomManager.Response_DealPoker:{
                 console.log("------------发牌---------------");
                 console.log("我的牌",res.data.pokers);
-                console.log("底牌",res.data.publicPokers);
                 let list:Array<any> = res.data.pokers;
                 for(let i = 0 ; i < list.length ; i ++){
                     this.pokers.push(new Poker(list[i].id,list[i].sort));
                 }
                 //显示自己的牌
                 this.showPokers();
+                
+            }  break;
+            case RoomManager.Response_ToCallTheLandlord:{
+                
+            }  break;
+            case RoomManager.Response_LandlordAndLastCard:{
+                console.log("------------产生地主---------------");
+                console.log("底牌",res.data.publicPokers);
+                console.log("地主座位号",res.data.landlordSeat);
                 let publicPokers:Array<any> = res.data.publicPokers;
                 for(let i = 0 ; i < publicPokers.length ; i ++){
                     this.publicPokers.push(new Poker(publicPokers[i].id,publicPokers[i].sort));
                 }
-            }  break;
-            case RoomManager.Response_ToCallTheLandlord:{
-
-            }  break;
-            case RoomManager.Response_LandlordAndLastCard:{
-
+                //显示底牌
+                this.showPublicPokers();
+                //如果自己是地主，将底牌加入自己的牌中，并刷新自己的牌，并显示出牌按钮
+                if(this.user.getSeat() == res.data.landlordSeat){
+                    this.pokers = this.pokers.concat(this.publicPokers);
+                    //清空玩家选择的牌
+                    this.selectedPokers = new Array<Poker>();
+                    this.showPokers();
+                    // this.showButtons(RoomManager.ButtonsDiscard);
+                    //自己的头像旁显示地主的标识
+                    this.showPortrait(true);
+                //地主的头像旁显示地主的标识
+                }else{
+                    this.showOtherPortrait(res.data.landlordSeat,true);
+                }   
             }  break;
             case RoomManager.Response_Discard:{
 
@@ -193,6 +215,8 @@ class ClassicModel extends egret.DisplayObjectContainer{
     }
 
     private showPokers() {
+        //先排序
+        this.pokers = PukerUtils.sortDescPokers(this.pokers);
         let index: number = this.pokers.length;
         let i: number = 0;
         let pokers:Array<Poker> = new Array<Poker>();
@@ -212,8 +236,6 @@ class ClassicModel extends egret.DisplayObjectContainer{
             },
             () => {
                 console.log("发牌结束");
-                //显示底牌
-                this.showPublicPokers();
                 /** 显示叫地主按钮 */
                 // this.showButtons(RoomManager.ButtonsCallTheLandlord);
                 // this.soundChannel.stop();

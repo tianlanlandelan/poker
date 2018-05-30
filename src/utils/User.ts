@@ -7,6 +7,7 @@ class User {
     private name:string;
     private sex:string;
     private seat:number = 1;
+    private isLandlord:boolean = false;
 
 
     public getId():string{
@@ -21,6 +22,9 @@ class User {
     public getSeat():number{
         return this.seat;
     }
+    public getILandlord():boolean{
+        return this.isLandlord;
+    }
     public setSeat(seat:number){
         this.seat = seat;
     }
@@ -29,5 +33,8 @@ class User {
     }
     public setName(name:string){
         this.name = name;
+    }
+    public setLandlord(isLandlord:boolean){
+        this.isLandlord = isLandlord;
     }
 }

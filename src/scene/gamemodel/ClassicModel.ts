@@ -374,7 +374,11 @@ class ClassicModel extends egret.DisplayObjectContainer{
         request.code = RoomManager.Request_Discard;
         body.roomId = this.roomId;
         body.userId = this.user.getId();
-        body.pokers = this.selectedPokers;
+        let pokerIds:string;
+        for(let i = 0 ; i < this.selectedPokers.length ; i ++){
+            pokerIds += this.selectedPokers[i].getId() + ",";
+        }
+        body.pokers = pokerIds;
         request.data = body;
         this.send(request);
     }

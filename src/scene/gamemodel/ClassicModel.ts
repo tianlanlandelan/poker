@@ -187,6 +187,7 @@ class ClassicModel extends egret.DisplayObjectContainer{
                     //清空玩家选择的牌
                     this.selectedPokers = new Array<Poker>();
                     this.showPokers();
+                    console.log("------------刷新自己的牌---------------",this.pokers);
                     //自己的头像旁显示地主的标识
                     this.showPortrait(true);
                     //显示出牌按钮
@@ -202,7 +203,7 @@ class ClassicModel extends egret.DisplayObjectContainer{
                 }   
             }  break;
             case RoomManager.Response_Discard:{
-
+                console.log("------------有玩家出牌---------------");
             }  break;
             default :{
                 console.log("onReceiveData:",res.code,res.data);
@@ -260,6 +261,7 @@ class ClassicModel extends egret.DisplayObjectContainer{
             },
             () => {
                 console.log("发牌结束");
+                this.showPokers();
             }
         );
 
@@ -374,13 +376,15 @@ class ClassicModel extends egret.DisplayObjectContainer{
         request.code = RoomManager.Request_Discard;
         body.roomId = this.roomId;
         body.userId = this.user.getId();
-        let pokerIds:string;
+        let pokerIds:string = "";
         for(let i = 0 ; i < this.selectedPokers.length ; i ++){
             pokerIds += this.selectedPokers[i].getId() + ",";
         }
         body.pokers = pokerIds;
         request.data = body;
         this.send(request);
+        this.clearButtons();
+        this.selectedPokers = new Array<Poker>();
     }
     public buttonBuYao(evt: egret.TouchEvent): void {
 

@@ -27,6 +27,7 @@ class ClassicModel extends egret.DisplayObjectContainer{
     private leftPlayer: User = PukerUtils.getRandomUser();
     private rightPlayer: User = PukerUtils.getRandomUser();
     private roomId:string;
+    private landlordSeat:number;
     /**
      * 玩家的牌
      */
@@ -180,6 +181,7 @@ class ClassicModel extends egret.DisplayObjectContainer{
                 console.log("底牌",res.data.publicPokers);
                 console.log("地主座位号",res.data.landlordSeat);
                 let landlordSeat = res.data.landlordSeat;
+                this.landlordSeat = landlordSeat;
                 this.activityPlayerSeat = landlordSeat;
                 let publicPokers:Array<any> = res.data.publicPokers;
                 for(let i = 0 ; i < publicPokers.length ; i ++){
@@ -221,7 +223,13 @@ class ClassicModel extends egret.DisplayObjectContainer{
                     if(array == null || array.length < 1){
                         console.log("--------自己未出牌----------")
                     }else{
-                        this.pokers = PukerUtils.removePokers(this.pokers,this.selectedPokers);
+                        this.activityPlayerSeat = seat;
+                        let activityPokers:Array<Poker> = new Array<Poker>();
+                        for(let i = 0 ; i < array.length ; i ++){
+                            activityPokers.push(new Poker(array[i].id,array[i].sort));
+                        }
+                        this.activityPokers = activityPokers;
+                        this.pokers = PukerUtils.removePokers(this.pokers,activityPokers);
                         this.showPokers();
                         this.showPokerPlay();
                     }
@@ -249,10 +257,12 @@ class ClassicModel extends egret.DisplayObjectContainer{
                         /*
                         其他玩家出牌，显示其他玩家出的牌
                         */
+                        this.activityPlayerSeat = seat;
                         let activityPokers:Array<Poker> = new Array<Poker>();
                         for(let i = 0 ; i < array.length ; i ++){
                             activityPokers.push(new Poker(array[i].id,array[i].sort));
                         }
+                        this.activityPokers = activityPokers;
                         if(this.isLeft(seat)){
                             this.clearChileByName("pokerPlayLeft");
                             this.clearChileByName("textLeft");
@@ -273,6 +283,24 @@ class ClassicModel extends egret.DisplayObjectContainer{
                     this.showButtons(RoomManager.ButtonsDiscard);
                 }
             }  break;
+            case RoomManager.Response_GameOver:{
+                console.log("------------游戏结束---------------");
+                console.log("胜利者",res.data.victory);
+                let victory:string = res.data.victory;
+                if(victory == RoomManager.Victory_Landlord){
+                    if(this.user.getSeat() == this.landlordSeat){
+                        console.log("---------胜利--------");
+                    }else{
+                        console.log("---------失败--------");
+                    }
+                }else{
+                    if(this.user.getSeat() == this.landlordSeat){
+                        console.log("---------失败--------");
+                    }else{
+                        console.log("---------胜利--------");
+                    }
+                }
+            } break;
             default :{
                 console.log("onReceiveData:",res.code,res.data);
             } break;
@@ -447,8 +475,8 @@ class ClassicModel extends egret.DisplayObjectContainer{
         
     }
     public buttonBuYao(evt: egret.TouchEvent): void {
-        if(this.pokers.length == 20){
-            console.log("地主首张牌不能不出");
+        if(this.pokers.length == 20 || this.activityPlayerSeat == this.user.getSeat()){
+            console.log("-------不能不出-------");
             return;
         }
         let request:any = new Object;

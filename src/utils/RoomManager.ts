@@ -54,6 +54,15 @@ class RoomManager {
     public static  Response_Discard = 2007;
 
     /**
+     * Server通知玩家游戏结束
+     */
+    public static  Response_GameOver = 2008;
+
+    public static  Victory_Landlord = "Landlord";
+
+    public static  Victory_Farmer = "Farmer";
+
+    /**
      * 叫地主按钮组类型
      */
     public static ButtonsCallTheLandlord = 0;

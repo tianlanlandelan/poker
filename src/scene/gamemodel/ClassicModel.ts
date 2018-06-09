@@ -15,6 +15,9 @@ class ClassicModel extends egret.DisplayObjectContainer{
     private pokerPlayRight: PukerOtherContainer;//右边对家（下家）出的牌
     private pokerPlayLeft: PukerOtherContainer;//左边对家（上家）出的牌
 
+    private textRight: TextOtherContainer;//右边玩家（下家）的提示
+    private textLeft: TextOtherContainer;//左边玩家（上家）的提示
+
     private buttons: PlayerButtonContainer;//游戏按钮组
 
     private poc1Index: number = Math.floor(Math.random() * 10) + 1;
@@ -210,30 +213,64 @@ class ClassicModel extends egret.DisplayObjectContainer{
                 console.log("------------有玩家出牌---------------");
                 console.log("玩家座位号",res.data.seat);
                 console.log("牌",res.data.pokers);
-                let seat:number = res.data.seat;
-                let array:Array<any> = res.data.pokers;
+                let seat:number = res.data.seat;//出牌玩家的座位号
+                let array:Array<any> = res.data.pokers;//玩家出的牌
+                let nextSeat:number = res.data.nextSeat;//下一个出牌人座位号
+                //如果是自己出的牌，刷新自己的牌
                 if(seat == this.user.getSeat()){
-                    this.pokers = PukerUtils.removePokers(this.pokers,this.selectedPokers);
-                    this.showPokers();
-
-                    this.showPokerPlay();
-                    this.selectedPokers = new Array<Poker>();
-                }else{
-                    let activityPokers:Array<Poker> = new Array<Poker>();
-                    for(let i = 0 ; i < array.length ; i ++){
-                        activityPokers.push(new Poker(array[i].id,array[i].sort));
-                    }
-                    if(this.isLeft(seat)){
-                        this.clearChileByName("pokerPlayLeft");
-                        this.pokerPlayLeft = new PukerOtherContainer(activityPokers, true);
-                        this.pokerPlayLeft.name = "pokerPlayLeft";
-                        this.addChild(this.pokerPlayLeft);
+                    if(array == null || array.length < 1){
+                        console.log("--------自己未出牌----------")
                     }else{
-                        this.clearChileByName("pokerPlayRight");
-                        this.pokerPlayRight = new PukerOtherContainer(activityPokers, false);
-                        this.pokerPlayRight.name = "pokerPlayLeft";
-                        this.addChild(this.pokerPlayRight);
+                        this.pokers = PukerUtils.removePokers(this.pokers,this.selectedPokers);
+                        this.showPokers();
+                        this.showPokerPlay();
                     }
+                    this.selectedPokers = new Array<Poker>();
+                }else{//如果是别人出的牌，显示出的牌
+                    /*
+                    其他玩家未出牌，显示未出牌的提示
+                     */
+                    if(array == null || array.length < 1){
+                        console.log("--------别人未出牌----------")
+                        if(this.isLeft(seat)){
+                            this.clearChileByName("pokerPlayLeft");
+                            this.clearChileByName("textLeft");
+                            this.textLeft = new TextOtherContainer(PukerUtils.getRandomTextTip(), true);
+                            this.textLeft.name = "textLeft";
+                            this.addChild(this.textLeft);
+                        }else{
+                            this.clearChileByName("pokerPlayRight");
+                            this.clearChileByName("textRight");
+                            this.textRight = new TextOtherContainer(PukerUtils.getRandomTextTip(), false);
+                            this.textRight.name = "textRight";
+                            this.addChild(this.textRight);
+                        }
+                    }else{
+                        /*
+                        其他玩家出牌，显示其他玩家出的牌
+                        */
+                        let activityPokers:Array<Poker> = new Array<Poker>();
+                        for(let i = 0 ; i < array.length ; i ++){
+                            activityPokers.push(new Poker(array[i].id,array[i].sort));
+                        }
+                        if(this.isLeft(seat)){
+                            this.clearChileByName("pokerPlayLeft");
+                            this.clearChileByName("textLeft");
+                            this.pokerPlayLeft = new PukerOtherContainer(activityPokers, true);
+                            this.pokerPlayLeft.name = "pokerPlayLeft";
+                            this.addChild(this.pokerPlayLeft);
+                        }else{
+                            this.clearChileByName("pokerPlayRight");
+                            this.clearChileByName("textRight");
+                            this.pokerPlayRight = new PukerOtherContainer(activityPokers, false);
+                            this.pokerPlayRight.name = "pokerPlayLeft";
+                            this.addChild(this.pokerPlayRight);
+                        }
+                    }
+                }
+                //如果轮到自己出牌，显示出牌按钮
+                if(nextSeat == this.user.getSeat()){
+                    this.showButtons(RoomManager.ButtonsDiscard);
                 }
             }  break;
             default :{
@@ -373,6 +410,8 @@ class ClassicModel extends egret.DisplayObjectContainer{
      * 显示出牌按钮组
      */
     private showButtons(type: number) {
+        //显示出牌按钮组前，要清理自己的出牌区
+        this.clearChileByName("pokerPlay");
         this.clearChileByName("buttons");
         this.buttons = new PlayerButtonContainer(this, type);
         this.buttons.name = "buttons";
@@ -408,7 +447,18 @@ class ClassicModel extends egret.DisplayObjectContainer{
         
     }
     public buttonBuYao(evt: egret.TouchEvent): void {
-
+        if(this.pokers.length == 20){
+            console.log("地主首张牌不能不出");
+            return;
+        }
+        let request:any = new Object;
+        let body:any = new Object;
+        request.code = RoomManager.Request_Discard;
+        body.roomId = this.roomId;
+        body.userId = this.user.getId();
+        request.data = body;
+        this.send(request);
+        this.clearChileByName("buttons");
     }
     public buttonTiShi(evt: egret.TouchEvent): void {
        

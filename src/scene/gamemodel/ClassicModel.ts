@@ -74,7 +74,8 @@ class ClassicModel extends egret.DisplayObjectContainer{
      */
     private show(){  
         console.log("进入游戏房间");
-        this.init("ws://127.0.0.1:8800/pokerWebSocket",this.user.getName()); 
+        // this.showResult(true);
+        this.init("ws://118.89.149.21:8800/pokerWebSocket",this.user.getName()); 
         this.showPortrait(false);
     }
 
@@ -290,14 +291,18 @@ class ClassicModel extends egret.DisplayObjectContainer{
                 if(victory == RoomManager.Victory_Landlord){
                     if(this.user.getSeat() == this.landlordSeat){
                         console.log("---------胜利--------");
+                        this.showResult(true);
                     }else{
                         console.log("---------失败--------");
+                        this.showResult(false);
                     }
                 }else{
                     if(this.user.getSeat() == this.landlordSeat){
                         console.log("---------失败--------");
+                        this.showResult(false);
                     }else{
                         console.log("---------胜利--------");
+                        this.showResult(true);
                     }
                 }
             } break;
@@ -433,6 +438,14 @@ class ClassicModel extends egret.DisplayObjectContainer{
         this.parent.addChild(gameHall);
         this.parent.removeChild(this);
     }
+    /**
+     * 再来一局
+     */
+    public button_restart(): void {
+        let playerP2c: StandaloneModel = new StandaloneModel(this.user);
+        this.parent.addChild(playerP2c);
+        this.parent.removeChild(this);
+    }
     
     /**
      * 显示出牌按钮组
@@ -512,6 +525,16 @@ class ClassicModel extends egret.DisplayObjectContainer{
             console.log("removedArray", this.selectedPokers)
         }
     }
-  
+    private showResult(isVictory: boolean) {
+        if (this.getChildByName("result") != null) {
+            this.removeChild(this.getChildByName("result"));
+        }
+        let result: GameResultContainer = new GameResultContainer(isVictory);
+        result.name = "result";
+        this.addChild(result);
+        //TODO 这有个问题，showButtons没有起作用，需要排查
+        console.log("showResult 游戏结束");
+        this.showButtons(RoomManager.ButtonsGameOver);
+    }
 
 }

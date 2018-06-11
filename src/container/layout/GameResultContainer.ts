@@ -16,12 +16,12 @@ class GameResultContainer extends egret.DisplayObjectContainer{
 		this.height = pc.stageHeight;
 		
 		/** 遮罩层 */
-		// let bg:egret.Shape = new egret.Shape();
-		// bg.graphics.beginFill( 0x112233);
-    	// bg.graphics.drawRect( 0, 0, this.width, this.height ); 
-    	// bg.graphics.endFill();
-		// bg.alpha = 0.3;
-		// this.addChild(bg);
+		let bg:egret.Shape = new egret.Shape();
+		bg.graphics.beginFill( 0x112233);
+    	bg.graphics.drawRect( 0, 0, this.width, this.height ); 
+    	bg.graphics.endFill();
+		bg.alpha = 0.3;
+		this.addChild(bg);
 		this.show(isVictory);
 	}
 	private show(isVictory:boolean){

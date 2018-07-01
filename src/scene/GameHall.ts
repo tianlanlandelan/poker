@@ -45,13 +45,60 @@ class GameHall extends egret.DisplayObjectContainer{
 		 this.parent.removeChild(this);
 	 }
 	 private menuClassicModeClick(){
-		 console.log("menuClassicModeClick---");
-		 let player:ClassicModel = new ClassicModel(this.user);
-         this.parent.addChild(player);
-		 this.parent.removeChild(this);
+		//  console.log("menuClassicModeClick---");
+		//  let player:ClassicModel = new ClassicModel(this.user);
+        //  this.parent.addChild(player);
+		//  this.parent.removeChild(this);
+
+		// this.clearChileByName("menuContainer");
+		this.test();
 	 }
 	 private menuFriendModeClick(){
 		 console.log("menuFriendModeClick---");
 	 }
-	
+	private clearChileByName(name:string){
+       if (this.getChildByName(name) != null) {
+            this.removeChild(this.getChildByName(name));
+        } 
+    }
+	private test(){
+		var request = new egret.HttpRequest();
+		request.responseType = egret.HttpResponseType.TEXT;
+		request.open("http://127.0.0.1:8800/test",egret.HttpMethod.GET);
+		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		request.send();
+		request.addEventListener(egret.Event.COMPLETE,this.onGetComplete,this);
+		request.addEventListener(egret.IOErrorEvent.IO_ERROR,this.onGetIOError,this);
+		request.addEventListener(egret.ProgressEvent.PROGRESS,this.onGetProgress,this);
+	}
+	private onGetComplete(event:egret.Event):void {
+        var request = <egret.HttpRequest>event.currentTarget;
+		let res:Array<any> = JSON.parse(request.response);
+		console.log("get data : ",res);
+		for(let i = 0 ; i <res.length ; i ++){
+
+			var responseLabel = new egret.TextField();
+        	responseLabel.size = 18;
+			responseLabel.text = "房间号：" + i + " id:" +  res[i].id + "    name:" + res[i].name + "   sort:" + res[i].sort;
+			responseLabel.name = "responseLabel_" + i;
+			responseLabel.width = 1000;
+        	responseLabel.x = 50;
+        	responseLabel.y = 70 + i * 20;
+			responseLabel.touchEnabled = true;
+			responseLabel.addEventListener(egret.TouchEvent.TOUCH_TAP,this.responseLabelClick,this);
+			this.addChild(responseLabel);	
+			console.log(res[i].id)
+		}
+        
+    }
+    private onGetIOError(event:egret.IOErrorEvent):void {
+        console.log("get error : " + event);
+    }
+    private onGetProgress(event:egret.ProgressEvent):void {
+        console.log("get progress : " + Math.floor(100*event.bytesLoaded/event.bytesTotal) + "%");
+    }
+	private responseLabelClick(evt: egret.TouchEvent){
+		let obj:egret.TextField = evt.currentTarget;
+		console.log(obj.name);
+	}
 }

@@ -45,13 +45,13 @@ class GameHall extends egret.DisplayObjectContainer{
 		 this.parent.removeChild(this);
 	 }
 	 private menuClassicModeClick(){
-		//  console.log("menuClassicModeClick---");
-		//  let player:ClassicModel = new ClassicModel(this.user);
-        //  this.parent.addChild(player);
-		//  this.parent.removeChild(this);
+		 console.log("menuClassicModeClick---");
+		 let player:ClassicModel = new ClassicModel(this.user);
+         this.parent.addChild(player);
+		 this.parent.removeChild(this);
 
-		// this.clearChileByName("menuContainer");
-		this.test();
+		this.clearChileByName("menuContainer");
+		// this.testHttpRequest();
 	 }
 	 private menuFriendModeClick(){
 		 console.log("menuFriendModeClick---");
@@ -61,7 +61,7 @@ class GameHall extends egret.DisplayObjectContainer{
             this.removeChild(this.getChildByName(name));
         } 
     }
-	private test(){
+	private testHttpRequest(){
 		var request = new egret.HttpRequest();
 		request.responseType = egret.HttpResponseType.TEXT;
 		request.open("http://127.0.0.1:8800/test",egret.HttpMethod.GET);

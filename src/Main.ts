@@ -87,8 +87,6 @@ class Main extends egret.DisplayObjectContainer {
         }
     }
 
-    private textfield: egret.TextField;
-
     /**
      * 加载用户资料，在这里随机产生
      */

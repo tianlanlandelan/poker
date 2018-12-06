@@ -75,7 +75,7 @@ class ClassicModel extends egret.DisplayObjectContainer{
     private show(){  
         console.log("进入游戏房间");
         // this.showResult(true);
-        this.init("ws://118.89.149.21:8800/pokerWebSocket",this.user.getName()); 
+        this.init("ws://127.0.0.1:8800/pokerWebSocket",this.user.getName()); 
         this.showPortrait(false);
     }
 

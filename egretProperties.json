@@ -43,11 +43,12 @@
   "targets": {
     "android": {
       "appname": "poker",
-      "packagename": "com.atomic.poker"
+      "packagename": "com.originaldream.poker"
     },
     "ios": {
       "appname": "poker",
-      "packagename": "com.atomic.long"
+      "packagename": "com.atomic.long",
+      "hybrid": false
     }
   }
 }

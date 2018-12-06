@@ -3,6 +3,7 @@ class PukerUtils {
 	}
 
 	/**
+	 * TODO 去掉pukerIds，而将该数组的下标作为牌的id
 	 * 牌大小
 	 */
 	private static pukerSortValues:Array<number> =  [ 
@@ -54,21 +55,30 @@ class PukerUtils {
 	 * 随机生成一副牌
 	 */
 	public static getRandomPokers():Array<Poker>{
+		//定义Poker数组，这是最终要生成的一副扑克牌
 		let pokers:Array<Poker> =new Array<Poker>();
-		let length = this.pukerIds.length;
+		//选中的牌的下标
 		let index:number;
+		//将pukerIds重新复制一份作为选牌期间要处理的数组
 		let newArray:Array<number> = this.pukerIds.slice();
+		//选中的牌的id
 		let pukerIndex:number;
+		//选中的牌的id组成的数组
 		let array:Array<number> = [];
+		//遍历扑克牌Id数组
 		for(let i = 0 ; i < this.pukerIds.length ; i ++){
+			//随机生成一个小于要处理的数组长度的整数，作为选中的牌的下标
 			index = Math.floor(Math.random() * newArray.length);
+			//取数选中的id
 			pukerIndex = newArray[index];
+			//将选中的id放入数组
 			array.push(pukerIndex);
+			//将选剩下的牌重新组成一个数组
 			newArray = ArrayUtils.slice(newArray,0,index).concat(ArrayUtils.slice(newArray,index + 1,newArray.length));
-			length --;
 		}	
-		// console.log("array ",array.length,"-------",array.toString());
+		//遍历选中的扑克id
 		for(let j = 0 ; j < array.length ; j ++){
+			//从pukerIds和pukerSortValues中取出对应的属性值组成一幅扑克牌
 			let poker:Poker = new Poker(this.pukerIds[array[j] - 1],this.pukerSortValues[array[j] -1])
 			pokers.push(poker);
 		}

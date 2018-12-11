@@ -30,12 +30,12 @@
 		{
 			"name": "bg_jpg",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/assets/bg.jpg"
+			"url": "assets/bg.jpg"
 		},
 		{
 			"name": "egret_icon_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/assets/egret_icon.png"
+			"url": "assets/egret_icon.png"
 		},
 		{
 			"name": "description_json",
@@ -50,82 +50,82 @@
 		{
 			"name": "defaultPortrait_1_jpg",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/defaultPortrait_1.jpg"
+			"url": "defaultPortrait/defaultPortrait_1.jpg"
 		},
 		{
 			"name": "defaultPortrait_2_jpg",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/defaultPortrait_2.jpg"
+			"url": "defaultPortrait/defaultPortrait_2.jpg"
 		},
 		{
 			"name": "defaultPortrait_12_jpg",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/defaultPortrait_1.jpg"
+			"url": "defaultPortrait/defaultPortrait_1.jpg"
 		},
 		{
 			"name": "defaultPortrait_22_jpg",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/defaultPortrait_2.jpg"
+			"url": "defaultPortrait/defaultPortrait_2.jpg"
 		},
 		{
 			"name": "button_pass_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_pass.png"
+			"url": "button/button_pass.png"
 		},
 		{
 			"name": "button_none_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_none.png"
+			"url": "button/button_none.png"
 		},
 		{
 			"name": "button_ok_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_ok.png"
+			"url": "button/button_ok.png"
 		},
 		{
 			"name": "button_none2_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_none.png"
+			"url": "button/button_none.png"
 		},
 		{
 			"name": "button_ok2_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_ok.png"
+			"url": "button/button_ok.png"
 		},
 		{
 			"name": "button_pass2_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_pass.png"
+			"url": "button/button_pass.png"
 		},
 		{
 			"name": "button_tip_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_tip.png"
+			"url": "button/button_tip.png"
 		},
 		{
 			"name": "button_call_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_call.png"
+			"url": "button/button_call.png"
 		},
 		{
 			"name": "button_nocall_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_nocall.png"
+			"url": "button/button_nocall.png"
 		},
 		{
 			"name": "button_begin_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_begin.png"
+			"url": "button/button_begin.png"
 		},
 		{
 			"name": "button_leaveRoom_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_leaveRoom.png"
+			"url": "button/button_leaveRoom.png"
 		},
 		{
 			"name": "button_newGame_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/button/button_newGame.png"
+			"url": "button/button_newGame.png"
 		},
 		{
 			"name": "puker_json",
@@ -135,512 +135,512 @@
 		{
 			"name": "1_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/1.png"
+			"url": "puker/1.png"
 		},
 		{
 			"name": "2_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/2.png"
+			"url": "puker/2.png"
 		},
 		{
 			"name": "3_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/3.png"
+			"url": "puker/3.png"
 		},
 		{
 			"name": "4_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/4.png"
+			"url": "puker/4.png"
 		},
 		{
 			"name": "5_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/5.png"
+			"url": "puker/5.png"
 		},
 		{
 			"name": "6_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/6.png"
+			"url": "puker/6.png"
 		},
 		{
 			"name": "7_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/7.png"
+			"url": "puker/7.png"
 		},
 		{
 			"name": "8_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/8.png"
+			"url": "puker/8.png"
 		},
 		{
 			"name": "9_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/9.png"
+			"url": "puker/9.png"
 		},
 		{
 			"name": "10_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/10.png"
+			"url": "puker/10.png"
 		},
 		{
 			"name": "11_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/11.png"
+			"url": "puker/11.png"
 		},
 		{
 			"name": "12_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/12.png"
+			"url": "puker/12.png"
 		},
 		{
 			"name": "13_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/13.png"
+			"url": "puker/13.png"
 		},
 		{
 			"name": "14_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/14.png"
+			"url": "puker/14.png"
 		},
 		{
 			"name": "15_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/15.png"
+			"url": "puker/15.png"
 		},
 		{
 			"name": "16_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/16.png"
+			"url": "puker/16.png"
 		},
 		{
 			"name": "17_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/17.png"
+			"url": "puker/17.png"
 		},
 		{
 			"name": "18_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/18.png"
+			"url": "puker/18.png"
 		},
 		{
 			"name": "19_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/19.png"
+			"url": "puker/19.png"
 		},
 		{
 			"name": "20_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/20.png"
+			"url": "puker/20.png"
 		},
 		{
 			"name": "21_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/21.png"
+			"url": "puker/21.png"
 		},
 		{
 			"name": "22_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/22.png"
+			"url": "puker/22.png"
 		},
 		{
 			"name": "23_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/23.png"
+			"url": "puker/23.png"
 		},
 		{
 			"name": "24_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/24.png"
+			"url": "puker/24.png"
 		},
 		{
 			"name": "26_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/26.png"
+			"url": "puker/26.png"
 		},
 		{
 			"name": "27_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/27.png"
+			"url": "puker/27.png"
 		},
 		{
 			"name": "28_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/28.png"
+			"url": "puker/28.png"
 		},
 		{
 			"name": "29_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/29.png"
+			"url": "puker/29.png"
 		},
 		{
 			"name": "30_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/30.png"
+			"url": "puker/30.png"
 		},
 		{
 			"name": "31_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/31.png"
+			"url": "puker/31.png"
 		},
 		{
 			"name": "32_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/32.png"
+			"url": "puker/32.png"
 		},
 		{
 			"name": "33_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/33.png"
+			"url": "puker/33.png"
 		},
 		{
 			"name": "34_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/34.png"
+			"url": "puker/34.png"
 		},
 		{
 			"name": "35_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/35.png"
+			"url": "puker/35.png"
 		},
 		{
 			"name": "36_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/36.png"
+			"url": "puker/36.png"
 		},
 		{
 			"name": "25_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/25.png"
+			"url": "puker/25.png"
 		},
 		{
 			"name": "startBgImg_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/bgImg/startBgImg.jpg"
+			"url": "bgImg/startBgImg.png"
 		},
 		{
 			"name": "50_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/50.png"
+			"url": "puker/50.png"
 		},
 		{
 			"name": "51_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/51.png"
+			"url": "puker/51.png"
 		},
 		{
 			"name": "52_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/52.png"
+			"url": "puker/52.png"
 		},
 		{
 			"name": "53_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/53.png"
+			"url": "puker/53.png"
 		},
 		{
 			"name": "54_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/54.png"
+			"url": "puker/54.png"
 		},
 		{
 			"name": "37_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/37.png"
+			"url": "puker/37.png"
 		},
 		{
 			"name": "38_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/38.png"
+			"url": "puker/38.png"
 		},
 		{
 			"name": "39_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/39.png"
+			"url": "puker/39.png"
 		},
 		{
 			"name": "40_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/40.png"
+			"url": "puker/40.png"
 		},
 		{
 			"name": "41_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/41.png"
+			"url": "puker/41.png"
 		},
 		{
 			"name": "42_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/42.png"
+			"url": "puker/42.png"
 		},
 		{
 			"name": "43_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/43.png"
+			"url": "puker/43.png"
 		},
 		{
 			"name": "44_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/44.png"
+			"url": "puker/44.png"
 		},
 		{
 			"name": "45_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/45.png"
+			"url": "puker/45.png"
 		},
 		{
 			"name": "46_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/46.png"
+			"url": "puker/46.png"
 		},
 		{
 			"name": "47_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/47.png"
+			"url": "puker/47.png"
 		},
 		{
 			"name": "48_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/48.png"
+			"url": "puker/48.png"
 		},
 		{
 			"name": "49_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/puker/49.png"
+			"url": "puker/49.png"
 		},
 		{
 			"name": "puker_deal_mp3",
 			"type": "sound",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/audio/puker_deal.mp3"
+			"url": "audio/puker_deal.mp3"
 		},
 		{
 			"name": "bg_guzheng_mp3",
 			"type": "sound",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/audio/bg_guzheng.mp3"
+			"url": "audio/bg_guzheng.mp3"
 		},
 		{
 			"name": "gameBgImg_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/bgImg/gameBgImg.jpg"
+			"url": "bgImg/gameBgImg.png"
 		},
 		{
 			"name": "lady_7_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_7.png"
+			"url": "defaultPortrait/lady/lady_7.png"
 		},
 		{
 			"name": "lady_8_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_8.png"
+			"url": "defaultPortrait/lady/lady_8.png"
 		},
 		{
 			"name": "lady_9_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_9.png"
+			"url": "defaultPortrait/lady/lady_9.png"
 		},
 		{
 			"name": "lady_10_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_10.png"
+			"url": "defaultPortrait/lady/lady_10.png"
 		},
 		{
 			"name": "lady_1_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_1.png"
+			"url": "defaultPortrait/lady/lady_1.png"
 		},
 		{
 			"name": "lady_2_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_2.png"
+			"url": "defaultPortrait/lady/lady_2.png"
 		},
 		{
 			"name": "lady_3_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_3.png"
+			"url": "defaultPortrait/lady/lady_3.png"
 		},
 		{
 			"name": "lady_4_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_4.png"
+			"url": "defaultPortrait/lady/lady_4.png"
 		},
 		{
 			"name": "lady_5_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_5.png"
+			"url": "defaultPortrait/lady/lady_5.png"
 		},
 		{
 			"name": "lady_6_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/lady/lady_6.png"
+			"url": "defaultPortrait/lady/lady_6.png"
 		},
 		{
 			"name": "man_6_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_6.png"
+			"url": "defaultPortrait/man/man_6.png"
 		},
 		{
 			"name": "man_7_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_7.png"
+			"url": "defaultPortrait/man/man_7.png"
 		},
 		{
 			"name": "man_8_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_8.png"
+			"url": "defaultPortrait/man/man_8.png"
 		},
 		{
 			"name": "man_9_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_9.png"
+			"url": "defaultPortrait/man/man_9.png"
 		},
 		{
 			"name": "man_10_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_10.png"
+			"url": "defaultPortrait/man/man_10.png"
 		},
 		{
 			"name": "man_1_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_1.png"
+			"url": "defaultPortrait/man/man_1.png"
 		},
 		{
 			"name": "man_2_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_2.png"
+			"url": "defaultPortrait/man/man_2.png"
 		},
 		{
 			"name": "man_3_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_3.png"
+			"url": "defaultPortrait/man/man_3.png"
 		},
 		{
 			"name": "man_4_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_4.png"
+			"url": "defaultPortrait/man/man_4.png"
 		},
 		{
 			"name": "man_5_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/defaultPortrait/man/man_5.png"
+			"url": "defaultPortrait/man/man_5.png"
 		},
 		{
 			"name": "menu_friends_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_friends.png"
+			"url": "menu/menu_friends.png"
 		},
 		{
 			"name": "menu_home_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_home.png"
+			"url": "menu/menu_home.png"
 		},
 		{
 			"name": "menu_messages_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_messages.png"
+			"url": "menu/menu_messages.png"
 		},
 		{
 			"name": "menu_offlineMode_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_offlineMode.png"
+			"url": "menu/menu_offlineMode.png"
 		},
 		{
 			"name": "menu_package_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_package.png"
+			"url": "menu/menu_package.png"
 		},
 		{
 			"name": "menu_pet_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_pet.png"
+			"url": "menu/menu_pet.png"
 		},
 		{
 			"name": "menu_setting_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_setting.png"
+			"url": "menu/menu_setting.png"
 		},
 		{
 			"name": "menu_shop_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_shop.png"
+			"url": "menu/menu_shop.png"
 		},
 		{
 			"name": "menu_activity_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_activity.png"
+			"url": "menu/menu_activity.png"
 		},
 		{
 			"name": "menu_classicMode_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_classicMode.png"
+			"url": "menu/menu_classicMode.png"
 		},
 		{
 			"name": "menu_customerServer_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_customerServer.png"
+			"url": "menu/menu_customerServer.png"
 		},
 		{
 			"name": "menu_friendMode_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/menu/menu_friendMode.png"
+			"url": "menu/menu_friendMode.png"
 		},
 		{
 			"name": "shop_button_add_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_button_add.png"
+			"url": "shop/shop_button_add.png"
 		},
 		{
 			"name": "shop_button_subtract_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_button_subtract.png"
+			"url": "shop/shop_button_subtract.png"
 		},
 		{
 			"name": "shop_egg_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_egg.png"
+			"url": "shop/shop_egg.png"
 		},
 		{
 			"name": "shop_milk_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_milk.png"
+			"url": "shop/shop_milk.png"
 		},
 		{
 			"name": "shop_nest_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_nest.png"
+			"url": "shop/shop_nest.png"
 		},
 		{
 			"name": "shop_ssb_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_ssb.png"
+			"url": "shop/shop_ssb.png"
 		},
 		{
 			"name": "currency_copper_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/currency_copper.png"
+			"url": "shop/currency_copper.png"
 		},
 		{
 			"name": "currency_shell_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/currency_shell.png"
+			"url": "shop/currency_shell.png"
 		},
 		{
 			"name": "shop_bgImg_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_bgImg.png"
+			"url": "shop/shop_bgImg.png"
 		},
 		{
 			"name": "shop_button_buy_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_button_buy.png"
+			"url": "shop/shop_button_buy.png"
 		},
 		{
 			"name": "shop_input_bgImg_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_input_bgImg.png"
+			"url": "shop/shop_input_bgImg.png"
 		},
 		{
 			"name": "shop_name_bgImg_png",
 			"type": "image",
-			"url": "http://yangkaile-1256621764.cos.ap-beijing.myqcloud.com/poker/resource/shop/shop_name_bgImg.png"
+			"url": "shop/shop_name_bgImg.png"
 		}
 	]
 }
